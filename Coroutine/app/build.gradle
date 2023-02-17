@@ -35,7 +35,7 @@ android {
 dependencies {
     //https://developer.android.google.cn/kotlin/coroutines?hl=zh-cn#kts
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.6.1'
