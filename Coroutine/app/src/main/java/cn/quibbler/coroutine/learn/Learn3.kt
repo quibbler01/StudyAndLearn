@@ -78,7 +78,7 @@ fun <R, T> launchCoroutine(receiver: R, block: suspend R.() -> T) {
 /**
  * 模拟一个生成器协程的作用域，使用它来创建一个协程
  *
- * RestrictsSuspension注解的作用域，协程体内无法调用其它外部挂起函数，只能调用这个作用域内部的挂起函数。
+ * RestrictsSuspension注解的作用域，协程体内无法调用其它外部挂起函数，只能调用这个作用域内部的挂起函数。比如只能调用produce
  * @param T
  */
 @RestrictsSuspension
