@@ -33,6 +33,9 @@ android {
 }
 
 dependencies {
+    //https://square.github.io/retrofit/
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
     //https://developer.android.google.cn/kotlin/coroutines?hl=zh-cn#kts
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
