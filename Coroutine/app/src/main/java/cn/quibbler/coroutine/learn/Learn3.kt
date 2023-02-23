@@ -20,7 +20,7 @@ suspend fun main(args: Array<String>) {
     suspend {
         "Hello Quibbler"
     }.startCoroutine(object : Continuation<String> {
-        override val context: CoroutineContext = LogInterceptor()
+        override val context: CoroutineContext = LogInterceptor() + LogInterceptor() + LogInterceptor()
 
         override fun resumeWith(result: Result<String>) {
             print("directly start coroutine, result is $result\n")
