@@ -55,3 +55,17 @@ class Learn4 {
     }   //返回的就是一个迭代器
 
 }
+
+class User {}
+
+suspend fun getUser(): User {
+    return getUserLocal() ?: getUserRemote()
+}
+
+suspend fun getUserRemote(): User {
+    return User()
+}
+
+suspend fun getUserLocal(): User? {
+    return null
+}
