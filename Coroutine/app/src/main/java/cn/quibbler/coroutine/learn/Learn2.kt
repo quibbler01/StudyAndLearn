@@ -1,5 +1,8 @@
 package cn.quibbler.coroutine.learn
 
+import cn.quibbler.coroutine.learn.Learn5.Job
+import kotlin.coroutines.coroutineContext
+
 class Learn2 {
 
     suspend fun level_0() {
@@ -14,6 +17,7 @@ class Learn2 {
     }
 
     suspend fun level_2() {
-
+        //Returns the context of the current coroutine.
+        coroutineContext[Job]?.isActive
     }
 }

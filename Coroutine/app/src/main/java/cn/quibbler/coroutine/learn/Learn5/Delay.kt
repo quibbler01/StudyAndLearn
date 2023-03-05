@@ -14,8 +14,14 @@ class Delay {
     }
 
     suspend fun delay(time: Long, unit: TimeUnit = TimeUnit.MILLISECONDS) {
+        if (time <= 0) {
+            return
+        }
+
         suspendCoroutine<Unit> { continuation ->
-            executor.schedule({ continuation.resume(Unit) }, time, unit)
+            val future = executor.schedule({ continuation.resume(Unit) }, time, unit)
+
+            //添加协程的回调，在协程取消时回调  future.cancel(true)
         }
     }
 
