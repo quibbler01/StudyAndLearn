@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id("kotlin-parcelize")
 }
 
 android {
@@ -38,6 +39,14 @@ dependencies {
 
     //https://developer.android.google.cn/kotlin/coroutines?hl=zh-cn#kts
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
+    //https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
+    implementation("androidx.core:core-ktx:1.9.0")
+
+    //https://developer.android.google.cn/kotlin/ktx/extensions-list?hl=zh-cn
+    implementation("androidx.collection:collection-ktx:1.2.0")
+    implementation("androidx.activity:activity-ktx:1.6.1")
+
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
