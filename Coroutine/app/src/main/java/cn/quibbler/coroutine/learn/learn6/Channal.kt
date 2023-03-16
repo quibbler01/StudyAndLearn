@@ -1,6 +1,6 @@
 package cn.quibbler.coroutine.learn.learn6
 
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -9,6 +9,49 @@ suspend fun main() {
 }
 
 class Channal {
+
+    /**
+     * 启动一个生产者协程，可以用来接收数据
+     */
+    val receiveChannel: ReceiveChannel<Int> = GlobalScope.produce {
+        repeat(100) {
+            delay(100)
+            send(it)
+        }
+    }
+
+    /**
+     * 启动一个消费者协程，向里面发送数据
+     */
+    val sendChannel: SendChannel<Int> = GlobalScope.actor {
+        while (true) {
+            val element = receive()
+            println(element)
+        }
+    }
+
+    /**
+     * public interface Channel<E> : SendChannel<E>, ReceiveChannel<E>
+     */
+    val channel = Channel<Int>()
+
+    private suspend fun testProducerAndActor() {
+        receiveChannel.receive()
+
+        sendChannel.send(10)
+    }
+
+    private fun closeChannel() {
+
+        channel.close()
+
+        //isClosedForSend立即为true
+        channel.isClosedForSend
+
+        //但是isClosedForReceive等所有元素都被读取完毕之后才返回true
+        channel.isClosedForReceive
+
+    }
 
     suspend fun test() {
 
