@@ -1,11 +1,15 @@
 package cn.quibbler.coroutine.learn.learn6
 
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 
 suspend fun main() {
-    Channal().test()
+    //Channal().test()
+
+    broadcastChannel()
 }
 
 class Channal {
@@ -116,5 +120,55 @@ class Channal {
         }
 
     }
+
+}
+
+@OptIn(ObsoleteCoroutinesApi::class)
+suspend fun broadcastChannel() {
+    //广播Channel，一对多，多个接收端不存在互斥
+    val broadcastChannel = BroadcastChannel<Int>(Channel.BUFFERED)
+
+    //订阅广播
+    val receiverChannel = broadcastChannel.openSubscription()
+
+    //val v = receiverChannel.receive()
+
+    val producer = GlobalScope.launch {
+        List(3) {
+            delay(100)
+            broadcastChannel.send(it)
+        }
+        broadcastChannel.close()
+    }
+
+    List(3) { index ->
+        GlobalScope.launch {
+            val receiveChannel = broadcastChannel.openSubscription()
+            for (i in receiveChannel) {
+                println("[#$index] received:$i")
+            }
+        }
+    }.joinAll()
+}
+
+suspend fun convertNormalChannelToBroadChannel(){
+    //普通 Channel
+    val channel = Channel<Int>()
+
+    //创建一个缓冲区大小为3的 BroadcastChannel
+    val broadcastChannel = channel.broadcast(3)
+
+    //创建的broadcastChannel与原来的channel是级联关系
+}
+
+suspend fun broadcastChannelProducer(){
+
+    val broadcastProducer = GlobalScope.broadcast<Int> {
+
+    }
+
+
+
+
 
 }
