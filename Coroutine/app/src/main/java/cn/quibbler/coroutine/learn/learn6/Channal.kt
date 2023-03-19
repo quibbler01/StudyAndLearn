@@ -12,6 +12,9 @@ suspend fun main() {
     broadcastChannel()
 }
 
+/**
+ * Channel是并发安全的
+ */
 class Channal {
 
     /**
