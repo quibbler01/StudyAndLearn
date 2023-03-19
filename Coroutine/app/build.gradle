@@ -8,6 +8,10 @@ android {
     namespace 'cn.quibbler.coroutine'
     compileSdk 33
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "cn.quibbler.coroutine"
         minSdk 24
