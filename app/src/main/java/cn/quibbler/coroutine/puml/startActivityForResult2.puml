@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> ActivityTaskSupervisor : realStartActivityLocked
+    activate ActivityTaskSupervisor
+
+    ActivityTaskSupervisor -> ActivityTaskManagerService : getLifecycleManager()
+        activate ActivityTaskManagerService
+        ActivityTaskManagerService -> ActivityTaskSupervisor
+        deactivate ActivityTaskManagerService
+
+    ActivityTaskSupervisor -[#FF0000]> ClientLifecycleManager : scheduleTransaction
+    activate ClientLifecycleManager
+        ClientLifecycleManager -> ClientTransaction : schedule()
+            activate ClientTransaction
+            ClientTransaction -> ApplicationThread : scheduleTransaction
+                activate ApplicationThread
+                    ApplicationThread -> ActivityThread : scheduleTransaction
+                        activate ActivityThread
+                        ActivityThread -> ClientTransactionHandler : scheduleTransaction
+                            activate ClientTransactionHandler
+                                ClientTransactionHandler -> ClientTransaction : preExecute
+                                    activate ClientTransaction
+                                ClientTransaction -> ClientTransactionHandler
+                                    deactivate ClientTransaction
+                                ClientTransactionHandler -[#FF0000]> ActivityThread : sendMessage
+                                    activate ActivityThread
+                                ActivityThread -> ClientTransactionHandler
+                                    deactivate ActivityThread
+
+                        ClientTransactionHandler -> ActivityThread
+                            deactivate ClientTransactionHandler
+                    ActivityThread -> ApplicationThread
+                        deactivate ActivityThread
+
+            ApplicationThread -> ClientTransaction
+                deactivate ApplicationThread
+
+
+
+        ClientTransaction -> ClientLifecycleManager
+            deactivate ClientTransaction
+
+
+
+    ClientLifecycleManager -> ActivityTaskSupervisor
+    deactivate ClientLifecycleManager
+
+
+
+
+
+
+
+
+
+
+
+
+<- ActivityTaskSupervisor
+ deactivate ActivityTaskSupervisor
+
+@enduml

@@ -1,0 +1,79 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+ -> ActivityTaskManagerService : startActivity
+        activate ActivityTaskManagerService
+        ActivityTaskManagerService -> ActivityTaskManagerService : startActivityAsUser
+            activate ActivityTaskManagerService
+        ActivityTaskManagerService -> ActivityTaskManagerService : getActivityStartController
+
+            ActivityTaskManagerService -> ActivityStartController : obtainStarter
+                activate ActivityStartController
+                ActivityStartController -> ActivityTaskManagerService : ActivityStarter
+                deactivate ActivityStartController
+
+                ActivityTaskManagerService -[#FF0000]> ActivityStarter : execute
+                    activate ActivityStarter
+                    ActivityStarter -> ActivityStarter : executeRequest
+                        activate ActivityStarter
+                        deactivate ActivityStarter
+
+                    ActivityStarter -> ActivityStarter : startActivityUnchecked
+                        activate ActivityStarter
+                        deactivate ActivityStarter
+
+                    ActivityStarter -> ActivityStarter : startActivityInner
+                        activate ActivityStarter
+                            ActivityStarter -> Task : startActivityLocked
+                                activate Task
+                                Task -> ActivityStarter
+                                deactivate Task
+
+                            ActivityStarter -> RootWindowContainer : resumeFocusedTasksTopActivities
+                                activate RootWindowContainer
+
+                                RootWindowContainer -> Task : resumeTopActivityUncheckedLocked
+                                    activate Task
+
+                                        Task -> Task : resumeTopActivityInnerLocked
+                                            activate Task
+                                                Task -> TaskFragment : resumeTopActivity
+                                                    activate TaskFragment
+
+                                                    TaskFragment -> TaskDisplayArea : pauseBackTasks
+                                                        activate TaskDisplayArea
+                                                    TaskDisplayArea -> TaskFragment
+                                                        deactivate TaskDisplayArea
+
+                                                    TaskFragment -> TaskFragment : startPausing
+                                                        activate TaskFragment
+                                                            TaskFragment -> TaskFragment : schedulePauseActivity
+                                                        deactivate TaskFragment
+
+                                                    TaskFragment -> ActivityTaskSupervisor : startSpecificActivity
+                                                        activate ActivityTaskSupervisor
+                                                            ActivityTaskSupervisor -[#FF0000]> ActivityTaskSupervisor : realStartActivityLocked
+                                                        ActivityTaskSupervisor -> TaskFragment
+                                                        deactivate ActivityTaskSupervisor
+
+
+                                                TaskFragment -> Task
+                                                    deactivate TaskFragment
+
+                                            deactivate Task
+                                    Task -> RootWindowContainer
+                                    deactivate Task
+
+                                RootWindowContainer -> ActivityStarter
+                                deactivate RootWindowContainer
+
+
+                        deactivate ActivityStarter
+
+                ActivityStarter -> ActivityTaskManagerService
+                    deactivate ActivityStarter
+ <- ActivityTaskManagerService :result
+ deactivate ActivityTaskManagerService
+
+@enduml

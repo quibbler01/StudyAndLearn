@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> TaskFragment : resumeTopActivity
+    activate TaskFragment
+
+        TaskFragment -> ClientTransaction : obtain()
+            activate ClientTransaction
+        ClientTransaction -> TaskFragment : transaction
+            deactivate ClientTransaction
+
+        TaskFragment -> ActivityResultItem : obtain()
+            activate ActivityResultItem
+        ActivityResultItem -[#FF0000]> TaskFragment : activityResultItem
+            deactivate ActivityResultItem
+
+        TaskFragment -> ClientTransaction : addCallback()
+            activate ClientTransaction
+        ClientTransaction -> TaskFragment
+            deactivate ClientTransaction
+
+        TaskFragment -> ResumeActivityItem : obtain()
+            activate ResumeActivityItem
+        ResumeActivityItem -> TaskFragment : resumeActivityItem
+            deactivate ResumeActivityItem
+
+        TaskFragment -> ClientTransaction : setLifecycleStateRequest()
+            activate ClientTransaction
+        ClientTransaction -> TaskFragment
+            deactivate ClientTransaction
+
+
+        TaskFragment -> ActivityTaskManagerService : getLifecycleManager()
+            activate ActivityTaskManagerService
+        ActivityTaskManagerService -> TaskFragment : ClientLifecycleManager
+            deactivate ActivityTaskManagerService
+
+        TaskFragment -[#FF0000]> ClientLifecycleManager : scheduleTransaction()
+            activate ClientLifecycleManager
+        ClientLifecycleManager -> TaskFragment
+            deactivate ClientLifecycleManager
+
+
+<- TaskFragment
+ deactivate TaskFragment
+@enduml

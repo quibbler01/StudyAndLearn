@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-[#FF0000]> Activity : finish
+    activate Activity
+
+    Activity -> ActivityClient : getInstance
+        activate ActivityClient
+    ActivityClient -> Activity
+        deactivate ActivityClient
+
+    Activity -> ActivityClient : finishActivity
+        activate ActivityClient
+        ActivityClient -> ActivityClient : getActivityClientController
+
+        ActivityClient -> ActivityClientController : finishActivity
+            activate ActivityClientController
+                ActivityClientController -> ActivityRecord : finishIfPossible
+                    activate ActivityRecord
+                    ActivityRecord -> ActivityRecord : finishActivityResults
+                        activate ActivityRecord
+                        ActivityRecord -[#FF0000]> ActivityRecord : addResultLocked
+                    deactivate ActivityRecord
+
+                ActivityRecord -> ActivityClientController
+                    deactivate ActivityRecord
+
+        ActivityClientController -> ActivityClient
+            deactivate ActivityClientController
+
+    ActivityClient -> Activity
+        deactivate ActivityClient
+
+
+
+
+
+<- Activity
+ deactivate Activity
+
+@enduml

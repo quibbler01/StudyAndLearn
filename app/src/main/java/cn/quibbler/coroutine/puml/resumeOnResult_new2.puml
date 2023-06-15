@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> ClientLifecycleManager : scheduleTransaction()
+    activate ClientLifecycleManager
+
+    ClientLifecycleManager -> ClientTransaction : schedule()
+        activate ClientTransaction
+
+            ClientTransaction -> ApplicationThread : scheduleTransaction
+                activate ApplicationThread
+
+                    ApplicationThread -> ActivityThread : scheduleTransaction
+                        activate ActivityThread
+
+                        ActivityThread -> ClientTransactionHandler : scheduleTransaction
+                            activate ClientTransactionHandler
+
+                                    ClientTransactionHandler -> ClientTransaction : preExecute
+                                        activate ClientTransaction
+                                    ClientTransaction -> ClientTransactionHandler
+                                        deactivate ClientTransaction
+
+                                    ClientTransactionHandler -> ClientTransactionHandler : sendMessage
+                                          activate ClientTransactionHandler
+                                    ClientTransactionHandler -> ActivityThread : sendMessage
+                                          deactivate ClientTransactionHandler
+
+                                          activate ActivityThread
+                                          ActivityThread -> Handler : sendMessage
+                                            activate Handler
+                                          Handler -[#FF0000]> :handleMessage
+                                            deactivate Handler
+                                          deactivate ActivityThread
+
+
+                        ClientTransactionHandler -> ActivityThread
+                            deactivate ClientTransactionHandler
+
+                    ActivityThread -> ApplicationThread
+                        deactivate ActivityThread
+
+            ApplicationThread -> ClientTransaction
+                deactivate ApplicationThread
+
+
+
+    ClientTransaction -> ClientLifecycleManager
+        deactivate ClientTransaction
+
+
+<- ClientLifecycleManager
+ deactivate ClientLifecycleManager
+@enduml

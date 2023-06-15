@@ -1,0 +1,62 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> Handler : handleMessage
+    activate Handler
+
+    Handler -> TransactionExecutor : execute
+        activate TransactionExecutor
+
+            TransactionExecutor -> TransactionExecutor : executeCallbacks
+            activate TransactionExecutor
+
+                TransactionExecutor -> LaunchActivityItem : execute
+                    activate LaunchActivityItem
+                        LaunchActivityItem -> ClientTransactionHandler : handleLaunchActivity
+                            activate ClientTransactionHandler
+                                ClientTransactionHandler -> ActivityThread : handleLaunchActivity
+                                    activate ActivityThread
+                                        ActivityThread -> ActivityThread : performLaunchActivity
+                                        activate ActivityThread
+                                            ActivityThread -> Instrumentation : newActivity
+                                                activate Instrumentation
+                                            Instrumentation -> ActivityThread : activity
+                                                deactivate Instrumentation
+
+                                        ActivityThread -[#FF0000]> Activity : attach
+                                            activate Activity
+                                        Activity -> ActivityThread
+                                            deactivate Activity
+
+                                        ActivityThread -> Instrumentation : callActivityOnCreate
+                                            activate Instrumentation
+                                                Instrumentation -> Activity : performCreate
+                                                    activate Activity
+                                                        Activity -[#FF0000]> Activity : onCreate
+                                                Activity -> Instrumentation
+                                                    deactivate Activity
+                                        Instrumentation -> ActivityThread
+                                            deactivate Instrumentation
+
+                                        ActivityThread -> ActivityThread
+                                        deactivate ActivityThread
+
+                                ActivityThread -> ClientTransactionHandler
+                                    deactivate ActivityThread
+                        ClientTransactionHandler -> LaunchActivityItem
+                            deactivate ClientTransactionHandler
+
+                   LaunchActivityItem -> TransactionExecutor
+                   deactivate LaunchActivityItem
+
+            TransactionExecutor -> TransactionExecutor
+            deactivate TransactionExecutor
+
+    TransactionExecutor -> Handler
+        deactivate TransactionExecutor
+
+<- Handler
+ deactivate Handler
+
+@enduml

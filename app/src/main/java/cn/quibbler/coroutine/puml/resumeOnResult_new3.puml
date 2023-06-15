@@ -1,0 +1,97 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> Handler : handleMessage()
+    activate Handler
+
+        Handler -> TransactionExecutor : execute()
+            activate TransactionExecutor
+
+                TransactionExecutor -> TransactionExecutor : executeCallbacks
+                    activate TransactionExecutor
+
+                        TransactionExecutor -> ActivityResultItem : execute
+                            activate ActivityResultItem
+                                ActivityResultItem -[#FF0000]> ClientTransactionHandler : handleSendResult
+                                    activate ClientTransactionHandler
+
+                                ClientTransactionHandler -[#FF0000]> ActivityThread : handleSendResult
+                                    activate ActivityThread
+
+                                    ActivityThread -[#FF0000]> ActivityThread : deliverResults
+                                        activate ActivityThread
+
+                                            ActivityThread -[#FF0000]> Activity : dispatchActivityResult
+                                                activate Activity
+
+                                                    Activity -[#FF0000]> Activity : onActivityResult
+
+                                            Activity -> ActivityThread
+                                                deactivate Activity
+
+                                    ActivityThread -> ActivityThread
+                                        deactivate ActivityThread
+
+                                ActivityThread -> ClientTransactionHandler
+                                    deactivate ActivityThread
+
+                                ClientTransactionHandler -> ActivityResultItem
+                                    deactivate ClientTransactionHandler
+
+                        ActivityResultItem -> TransactionExecutor
+                            deactivate ActivityResultItem
+
+
+                TransactionExecutor -> TransactionExecutor
+                    deactivate TransactionExecutor
+
+                TransactionExecutor -> TransactionExecutor : executeLifecycleState
+                    activate TransactionExecutor
+
+                        TransactionExecutor -> ClientTransaction : getLifecycleStateRequest()
+                            activate ClientTransaction
+                        ClientTransaction -> TransactionExecutor
+                            deactivate ClientTransaction
+
+                        TransactionExecutor -> ResumeActivityItem : execute
+                            activate ResumeActivityItem
+
+                                ResumeActivityItem -[#FF0000]> ActivityThread : handleResumeActivity
+                                    activate ActivityThread
+                                        ActivityThread -[#FF0000]> ActivityThread : performResumeActivity
+                                            activate ActivityThread
+                                                ActivityThread -[#FF0000]> Activity : performResume
+                                                    activate Activity
+
+                                                        Activity -[#FF0000]> Instrumentation : callActivityOnResume
+                                                            activate Instrumentation
+
+                                                                Instrumentation -[#FF0000]> Activity : onResume
+                                                                    activate Activity
+                                                                Activity -> Instrumentation
+                                                                    deactivate Activity
+
+                                                        Instrumentation -> Activity
+                                                            deactivate Instrumentation
+
+                                                Activity -> ActivityThread
+                                                    deactivate Activity
+                                        ActivityThread -> ActivityThread
+                                            deactivate ActivityThread
+
+                                ActivityThread -> ResumeActivityItem
+                                    deactivate ActivityThread
+
+                        ResumeActivityItem -> TransactionExecutor
+                            deactivate ResumeActivityItem
+
+                TransactionExecutor -> TransactionExecutor
+                    deactivate TransactionExecutor
+
+        TransactionExecutor -> Handler
+            deactivate TransactionExecutor
+
+<- Handler
+ deactivate Handler
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+ -> Activity: startActivity
+    activate Activity
+
+    Activity -> Activity : startActivityForResult
+
+    Activity -> Instrumentation : execStartActivity
+        activate Instrumentation
+
+    Instrumentation -> ActivityTaskManager : getService()
+        activate ActivityTaskManager
+    ActivityTaskManager -> Instrumentation : IActivityTaskManager
+        deactivate ActivityTaskManager
+    Instrumentation -[#FF0000]> ActivityTaskManagerService : startActivity
+        activate ActivityTaskManagerService
+    ActivityTaskManagerService -> Instrumentation : result
+        deactivate ActivityTaskManagerService
+    Instrumentation -> Activity
+        deactivate Instrumentation
+
+<- Activity
+    deactivate Activity
+@enduml

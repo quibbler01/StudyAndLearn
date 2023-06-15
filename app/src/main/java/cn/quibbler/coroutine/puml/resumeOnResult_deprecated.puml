@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> ActivityThread : handleResumeActivity
+    activate ActivityThread
+        ActivityThread -> ActivityThread : performResumeActivity
+            activate ActivityThread
+
+                ActivityThread -> ActivityThread : deliverResults
+                    activate ActivityThread
+                        ActivityThread -> Activity : dispatchActivityResult
+                            activate Activity
+                                Activity -[#FF0000]> Activity : onActivityResult
+                                activate Activity
+                                deactivate Activity
+                        Activity -> ActivityThread
+                            deactivate Activity
+
+               ActivityThread -> ActivityThread
+                    deactivate ActivityThread
+
+                ActivityThread -> Activity : performResume
+                    activate Activity
+
+                        Activity -> Instrumentation : callActivityOnResume
+                            activate Instrumentation
+                                Instrumentation -[#FF0000]> Activity : onResume()
+                                    activate Activity
+                                Activity -> Instrumentation
+                                    deactivate Activity
+
+                        Instrumentation -> Activity
+                            deactivate Instrumentation
+
+                Activity -> ActivityThread
+                    deactivate Activity
+
+        ActivityThread -> ActivityThread
+            deactivate ActivityThread
+
+<- ActivityThread
+ deactivate ActivityThread
+
+@enduml
