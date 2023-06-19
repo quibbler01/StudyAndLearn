@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> ActivityResultLauncher : launch
+    activate ActivityResultLauncher
+
+        ActivityResultLauncher -> ComponentActivity : onLaunch
+            activate ComponentActivity
+
+                ComponentActivity -> ActivityCompat : startActivityForResult
+                    activate ActivityCompat
+
+                        ActivityCompat -> Api16Impl : startActivityForResult
+                            deactivate Api16Impl
+
+                                Api16Impl -> Activity : startActivityForResult
+                                    activate Activity
+                                Activity -> Api16Impl
+                                    deactivate Activity
+
+                        Api16Impl -> ActivityCompat
+                            deactivate Api16Impl
+
+                ActivityCompat -> ComponentActivity
+                    deactivate ActivityCompat
+
+        ComponentActivity -> ActivityResultLauncher
+            deactivate ComponentActivity
+
+<- ActivityResultLauncher
+ deactivate ActivityResultLauncher
+@enduml

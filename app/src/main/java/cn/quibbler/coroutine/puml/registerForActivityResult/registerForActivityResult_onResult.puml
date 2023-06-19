@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> ComponentActivity : onActivityResult
+    activate ComponentActivity
+
+        ComponentActivity -> ActivityResultRegistry : dispatchResult
+            activate ActivityResultRegistry
+
+                ActivityResultRegistry -> ActivityResultRegistry : doDispatch
+                    activate ActivityResultRegistry
+
+                    ActivityResultRegistry -> ActivityResultCallback : onActivityResult
+                        activate ActivityResultCallback
+
+                    ActivityResultCallback -> ActivityResultRegistry
+                        deactivate ActivityResultCallback
+
+                ActivityResultRegistry -> ActivityResultRegistry
+                    deactivate ActivityResultRegistry
+
+        ActivityResultRegistry -> ComponentActivity
+            deactivate ActivityResultRegistry
+
+<- ComponentActivity
+ deactivate ComponentActivity
+@enduml

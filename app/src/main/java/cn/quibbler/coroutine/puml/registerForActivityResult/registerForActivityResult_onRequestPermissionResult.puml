@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> ComponentActivity : onRequestPermissionsResult
+    activate ComponentActivity
+
+        ComponentActivity -> ActivityResultRegistry : dispatchResult
+            activate ActivityResultRegistry
+
+
+
+
+        ActivityResultRegistry -> ComponentActivity
+            deactivate ActivityResultRegistry
+
+<- ComponentActivity
+ deactivate ComponentActivity
+@enduml

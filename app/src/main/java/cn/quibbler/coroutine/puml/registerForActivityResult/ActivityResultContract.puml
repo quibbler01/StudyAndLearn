@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class ActivityResultContract
+
+class StartActivityForResult extends ActivityResultContract
+class StartIntentSenderForResult extends ActivityResultContract
+
+class RequestPermission extends ActivityResultContract
+class RequestMultiplePermissions extends ActivityResultContract
+
+class TakePicturePreview extends ActivityResultContract
+class TakePicture extends ActivityResultContract
+class TakeVideo extends ActivityResultContract
+class CaptureVideo extends ActivityResultContract
+
+class PickContact extends ActivityResultContract
+
+class GetContent extends ActivityResultContract
+class GetMultipleContents extends ActivityResultContract
+
+class OpenDocument extends ActivityResultContract
+class OpenMultipleDocuments extends ActivityResultContract
+class OpenDocumentTree extends ActivityResultContract
+class CreateDocument extends ActivityResultContract
+
+class PickVisualMedia extends ActivityResultContract
+class PickMultipleVisualMedia extends ActivityResultContract
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> ComponentActivity : registerForActivityResult
+    activate ComponentActivity
+
+        ComponentActivity -> ActivityResultRegistry : register
+            activate ActivityResultRegistry
+
+                ActivityResultRegistry -> LifecycleOwner : getLifecycle()
+                    activate LifecycleOwner
+                LifecycleOwner -> ActivityResultRegistry
+                    deactivate LifecycleOwner
+
+               ActivityResultRegistry -> LifecycleContainer : LifecycleContainer(lifecycle)
+                    activate LifecycleContainer
+               LifecycleContainer -> ActivityResultRegistry : lifecycleContainer
+                    deactivate LifecycleContainer
+
+               ActivityResultRegistry -> LifecycleContainer : addObserver
+                    activate LifecycleContainer
+               LifecycleContainer -> ActivityResultRegistry
+                    deactivate LifecycleContainer
+
+        ActivityResultRegistry -> ComponentActivity : ActivityResultLauncher
+            deactivate ActivityResultRegistry
+
+<- ComponentActivity : ActivityResultLauncher
+ deactivate ComponentActivity
+@enduml
