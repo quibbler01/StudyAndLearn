@@ -15,6 +15,8 @@ public class TestOtto {
 
         bus.post(new Event());
 
+        bus.toString();
+
         bus.unregister(this);
     }
 
