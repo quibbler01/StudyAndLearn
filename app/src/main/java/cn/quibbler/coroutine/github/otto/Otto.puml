@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+ -> Bus: register(Object object)
+    activate Bus
+
+    Bus --> ThreadEnforcer: enforce(Bus bus)
+        activate ThreadEnforcer
+    ThreadEnforcer --> Bus
+        deactivate ThreadEnforcer
+
+    Bus -[#red]> HandlerFinder : findAllProducers(object)
+        note right: 解析注册对象中的生产者，用\n@Produce注解的方法
+        activate HandlerFinder
+    HandlerFinder -[#red]-> Bus
+        deactivate HandlerFinder
+    Bus -> Bus : dispatchProducerResultToHandler()
+
+
+    Bus -[#red]> HandlerFinder : findAllSubscribers(object)
+        note right: 解析注册对象中的订阅者，用\n@Subscribe注解的方法
+        activate HandlerFinder
+    HandlerFinder -[#red]-> Bus
+        deactivate HandlerFinder
+
+    Bus -> Bus : dispatchProducerResultToHandler()
+        activate Bus
+            Bus -> EventProducer : produceEvent()
+                activate EventProducer
+            EventProducer -> Bus : event
+                deactivate EventProducer
+
+            Bus -> Bus : dispatch()
+                activate Bus
+                Bus -> EventHandler : handleEvent(event)
+                    activate EventHandler
+                EventHandler -> Bus
+                    deactivate EventHandler
+            Bus -> Bus
+                deactivate Bus
+
+    Bus -> Bus
+        deactivate Bus
+
+
+<- Bus
+   deactivate Bus
+
+@enduml

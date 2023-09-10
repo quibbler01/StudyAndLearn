@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+ -> Bus: unregister(Object object)
+    activate Bus
+
+    Bus --> ThreadEnforcer: enforce(Bus bus)
+        activate ThreadEnforcer
+    ThreadEnforcer --> Bus
+        deactivate ThreadEnforcer
+
+    Bus -> HandlerFinder : findAllProducers(object)
+        activate HandlerFinder
+    HandlerFinder -> Bus
+        deactivate HandlerFinder
+    Bus -[#red]> EventProducer : invalidate()
+        activate EventProducer
+        note right: 使其无效，随后不再生成事件。\n从总线注销包装的EventProducer对象时调用。
+    EventProducer -> Bus
+        deactivate EventProducer
+
+    Bus -> HandlerFinder : findAllSubscribers(object)
+        activate HandlerFinder
+    HandlerFinder -> Bus
+        deactivate HandlerFinder
+    Bus -[#red]> EventHandler : invalidate()
+        activate EventHandler
+        note right: 使其无效，将拒绝处理事件。\n从总线注销包装的EventHandler对象时调用。
+    EventHandler -> Bus
+        deactivate EventHandler
+
+<- Bus
+   deactivate Bus
+
+@enduml
