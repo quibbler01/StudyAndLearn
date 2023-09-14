@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import cn.quibbler.coroutine.R
 import com.squareup.otto.Bus
+import com.squareup.otto.Produce
 import com.squareup.otto.Subscribe
 
 class OttoActivity : AppCompatActivity() {
@@ -33,6 +34,11 @@ class OttoActivity : AppCompatActivity() {
     @Subscribe
     fun onResult(event: Event) {
 
+    }
+
+    @Produce
+    fun event(): Event {
+        return Event()
     }
 
 }
