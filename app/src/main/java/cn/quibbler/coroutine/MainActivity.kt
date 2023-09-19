@@ -3,6 +3,7 @@ package cn.quibbler.coroutine
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
@@ -11,16 +12,18 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import cn.quibbler.coroutine.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     private val mainScope by lazy { MainScope() }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,22 +32,14 @@ class MainActivity : AppCompatActivity() {
 
         //use Coroutine in Lifecycle
         lifecycleScope.launch {
-            //todo
-        }
-
-        val register: ActivityResultContract<Intent, ActivityResult> = ActivityResultContracts.StartActivityForResult()
-
-        val callback = object : ActivityResultCallback<ActivityResult> {
-            override fun onActivityResult(result: ActivityResult?) {
-                Log.d("TAG", "resultCode:${result?.resultCode}  data:${result?.data}")
+            withContext(Dispatchers.IO) {
+                delay(5000)
+                val name = Thread.currentThread().name
+                mainScope.launch {
+                    binding.text.text = "$name    hello test ${Looper.getMainLooper() == Looper.myLooper()}"
+                }
             }
         }
-
-        val launcher: ActivityResultLauncher<Intent> = registerForActivityResult(register, callback)
-
-        val intent = Intent()
-
-        launcher.launch(intent)
 
     }
 
@@ -52,4 +47,5 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         mainScope.cancel()
     }
+
 }
