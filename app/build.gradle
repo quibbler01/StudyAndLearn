@@ -51,7 +51,6 @@ dependencies {
     implementation("androidx.collection:collection-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.6.1")
 
-    //https://uber.github.io/AutoDispose/
     //https://github.com/uber/AutoDispose
     implementation 'com.uber.autodispose2:autodispose-android:2.1.1'
 
@@ -82,4 +81,7 @@ dependencies {
 
     //https://github.com/kosi-libs/Kodein
     implementation 'org.kodein.di:kodein-di:7.19.0'
+
+    //https://github.com/square/moshi
+    implementation 'com.squareup.moshi:moshi:1.14.0'
 }
