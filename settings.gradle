@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "StudyAndLearn"
 include ':app'
 include ':codetop'
+include ':search'
