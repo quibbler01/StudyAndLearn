@@ -84,4 +84,10 @@ dependencies {
 
     //https://github.com/square/moshi
     implementation 'com.squareup.moshi:moshi:1.14.0'
+
+    //https://github.com/InsertKoinIO/koin
+    //https://insert-koin.io/docs/setup/koin/
+    def koin_version = "3.5.0"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
 }
