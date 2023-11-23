@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace 'cn.quibbler.coroutine'
-    compileSdk 33
+    compileSdk 34
 
     buildFeatures {
         viewBinding true
@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "cn.quibbler.coroutine"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -41,6 +41,9 @@ dependencies {
     //https://square.github.io/retrofit/
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
+    //https://github.com/square/okhttp
+    implementation"com.squareup.okhttp3:okhttp:4.11.0"
+
     //https://developer.android.google.cn/kotlin/coroutines?hl=zh-cn#kts
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
@@ -60,34 +63,36 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.6.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
+    implementation "androidx.startup:startup-runtime:1.1.1"
 
     //https://developer.android.com/kotlin/ktx/extensions-list#dependency_30
     implementation "androidx.room:room-ktx:2.5.0"
 
     //https://github.com/coil-kt/coil
-    implementation("io.coil-kt:coil:2.2.2")
+    implementation("io.coil-kt:coil:2.4.0")
 
     //https://github.com/square/otto
     implementation 'com.squareup:otto:1.3.8'
 
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.9.10"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //https://github.com/kosi-libs/Kodein
-    implementation 'org.kodein.di:kodein-di:7.19.0'
+    implementation("org.kodein.di:kodein-di:7.21.0")
 
     //https://github.com/square/moshi
-    implementation 'com.squareup.moshi:moshi:1.14.0'
+    implementation 'com.squareup.moshi:moshi:1.15.0'
 
     //https://github.com/InsertKoinIO/koin
     //https://insert-koin.io/docs/setup/koin/
-    def koin_version = "3.5.0"
-    implementation "io.insert-koin:koin-core:$koin_version"
-    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-core:3.5.0"
+    implementation "io.insert-koin:koin-android:3.5.0"
+
+    //https://github.com/Tencent/MMKV
+    implementation 'com.tencent:mmkv:1.3.2'
 }
