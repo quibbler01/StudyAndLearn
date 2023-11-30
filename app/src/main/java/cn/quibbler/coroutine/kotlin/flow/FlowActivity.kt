@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import cn.quibbler.coroutine.databinding.ActivityFlowBinding
+import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
@@ -31,6 +32,11 @@ class FlowActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initView()
+        lifecycleScope.launch {
+            MMKV.defaultMMKV().putString("key","hello")
+            delay(10000)
+            binding.console.append("${MMKV.defaultMMKV().getString("key","default")}")
+        }
     }
 
     @OptIn(FlowPreview::class)
