@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
                     when (it) {
                         is LeastNewsUiState.Success -> {
                             val newsList = it.news
-
                         }
 
                         is LeastNewsUiState.Error -> {
