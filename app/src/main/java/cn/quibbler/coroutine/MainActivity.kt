@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.quibbler.coroutine.databinding.ActivityMainBinding
 import cn.quibbler.coroutine.jitpack.viewmodel.SearchViewModel
+import cn.quibbler.coroutine.kotlin.exceptiontest.ExceptionTest
 import cn.quibbler.coroutine.kotlin.flow.LeastNewsUiState
 import cn.quibbler.coroutine.kotlin.flow.StateFlowVM
 import kotlinx.coroutines.Dispatchers
@@ -73,6 +74,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        ExceptionTest().catch()
 
     }
 
