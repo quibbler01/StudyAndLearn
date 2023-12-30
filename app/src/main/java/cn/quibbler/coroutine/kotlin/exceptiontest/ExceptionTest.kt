@@ -13,4 +13,14 @@ class ExceptionTest {
 
     }
 
+    fun Throwable?.safeCatch() {
+        this?.let {
+            try {
+                throw it
+            } catch (_: Throwable) {
+
+            }
+        }
+    }
+
 }
