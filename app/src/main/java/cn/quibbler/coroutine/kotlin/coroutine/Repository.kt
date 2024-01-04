@@ -9,7 +9,19 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.resume
+
+suspend fun getRemoteSync(): Boolean {
+    return suspendCancellableCoroutine { con ->
+        if (true) {
+            con.resume(false)
+        } else {
+            con.resume(true)
+        }
+    }
+}
 
 class Repository {
 
