@@ -1,10 +1,12 @@
 package cn.quibbler.coroutine
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.ImageView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
@@ -19,6 +21,15 @@ import cn.quibbler.coroutine.jitpack.viewmodel.SearchViewModel
 import cn.quibbler.coroutine.kotlin.exceptiontest.ExceptionTest
 import cn.quibbler.coroutine.kotlin.flow.LeastNewsUiState
 import cn.quibbler.coroutine.kotlin.flow.StateFlowVM
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -38,6 +49,30 @@ class MainActivity : AppCompatActivity() {
 
     private val stateFlowVM: StateFlowVM by viewModels()
 
+    private fun loadImage(img: ImageView, images: List<String>, index: Int) {
+        if (index >= images.size) return
+        Glide.with(applicationContext)
+            .load(images[index])
+            .addListener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
+                    loadImage(img, images, index + 1)
+                    return true
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean
+                ): Boolean {
+                    return true
+                }
+            }).preload()
+
+
+        val requestBuilder = Glide.with(this).asDrawable()
+        requestBuilder
+            .error("")
+            .preload()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -47,6 +82,25 @@ class MainActivity : AppCompatActivity() {
             "str$str"
         }
 
+        Glide.with(applicationContext)
+            .load("")
+            .error("")
+            .apply(RequestOptions().apply {
+                centerCrop()
+                placeholder(R.drawable.ic_launcher_background)
+                priority(Priority.HIGH)
+                diskCacheStrategy(DiskCacheStrategy.NONE)
+            }).addListener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
+                    return true
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean
+                ): Boolean {
+                    return true
+                }
+            }).preload()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
