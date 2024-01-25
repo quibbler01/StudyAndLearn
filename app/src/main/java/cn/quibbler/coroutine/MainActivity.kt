@@ -1,11 +1,14 @@
 package cn.quibbler.coroutine
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
+import android.os.PowerManager
 import android.util.Log
+import android.view.WindowManager
 import android.widget.ImageView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
@@ -82,6 +85,13 @@ class MainActivity : AppCompatActivity() {
             "str$str"
         }
 
+        //window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+        binding.view.setOnClickListener {
+            it.keepScreenOn = !it.keepScreenOn
+            binding.view.text = "keepScreenOn : ${it.keepScreenOn}"
+        }
+
         Glide.with(applicationContext)
             .load("")
             .error("")
@@ -117,20 +127,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
-        //use Coroutine in Lifecycle
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                delay(5000)
-                val name = Thread.currentThread().name
-                mainScope.launch {
-                    binding.text.text = "$name    hello test ${Looper.getMainLooper() == Looper.myLooper()}"
-                }
-            }
-        }
+    private fun enablePowerWakeLock() {
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        val wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "tag:Quibbler")
 
-        ExceptionTest().catch()
+        wakeLock.acquire()
+        wakeLock.acquire(60 * 60)
 
+        wakeLock.release()
     }
 
     override fun onDestroy() {
