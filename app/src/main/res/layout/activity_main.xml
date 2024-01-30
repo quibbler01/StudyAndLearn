@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -12,8 +11,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/cardview_shadow_start_color"
-        android:keepScreenOn="true" />
+        android:background="@color/cardview_shadow_start_color"/>
 
     <TextView
         android:id="@+id/text"

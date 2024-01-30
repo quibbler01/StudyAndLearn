@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
 
         //window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
+        binding.view.text = "keepScreenOn : ${binding.view.keepScreenOn}"
         binding.view.setOnClickListener {
             it.keepScreenOn = !it.keepScreenOn
             binding.view.text = "keepScreenOn : ${it.keepScreenOn}"
