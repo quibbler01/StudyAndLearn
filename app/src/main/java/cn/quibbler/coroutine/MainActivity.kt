@@ -85,6 +85,8 @@ class MainActivity : AppCompatActivity() {
             "str$str"
         }
 
+        requestPermissions(arrayOf(""), 1)
+
         //window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         binding.view.text = "keepScreenOn : ${binding.view.keepScreenOn}"
