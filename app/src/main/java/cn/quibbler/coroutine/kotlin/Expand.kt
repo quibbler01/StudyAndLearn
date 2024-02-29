@@ -1,5 +1,7 @@
 package cn.quibbler.coroutine.kotlin
 
+import android.view.View
+
 class Expand {
 
     fun test() {
@@ -23,5 +25,9 @@ class Expand {
     fun requestPermissions(vararg strs: String) {
 
     }
+
+}
+
+fun View?.isBlank() {
 
 }
