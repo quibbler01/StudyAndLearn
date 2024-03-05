@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Coroutine"
         tools:targetApi="31">
         <activity
-            android:name=".github.koin.KoinActivity"
+            android:name=".ui.view.SignInfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,15 +26,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".kotlin.flow.FlowActivity"
+            android:name=".github.koin.KoinActivity"
             android:exported="true">
 
         </activity>
         <activity
+            android:name=".kotlin.flow.FlowActivity"
+            android:exported="true"></activity>
+        <activity
             android:name=".jitpack.parcelize.ParcelizeActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".github.kodein.KodeinActivity"
             android:exported="true" />
@@ -49,8 +50,7 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
 
         <provider
             android:name="androidx.startup.InitializationProvider"
