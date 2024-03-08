@@ -5,23 +5,38 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.Signature
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import cn.quibbler.coroutine.R
+import cn.quibbler.coroutine.databinding.ActivitySignInfoBinding
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.util.Arrays
 import java.util.Locale
 
 
 class SignInfoActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySignInfoBinding
+
+    val str = "BC C3 5D 4D 36 06 F1 54 F0 40 2A B7 63 4E 84 90 C0 B2 44 C2 67 5C 3C 62 38 98 69 87 02 4F 0C 02".replace(" ", "")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_info)
+        binding = ActivitySignInfoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        AppSigning.getSingInfo(this, "com.tencent.mm", AppSigning.SHA256).apply {
+            binding.text2.append("SHA256:")
+            binding.text2.append(this)
+            binding.text2.append("\n")
+
+            //BCC35D4D3606F154F0402AB7634E8490C0B244C2675C3C6238986987024F0C02
+            binding.text2.append("SHA-256 签名: BC C3 5D 4D 36 06 F1 54 F0 40 2A B7 63 4E 84 90 C0 B2 44 C2 67 5C 3C 62 38 98 69 87 02 4F 0C 02 \n${str == this}")
+        }
+
     }
 
 }
+
 object AppSigning {
     var TAG = "AppSigning"
     const val MD5 = "MD5"
@@ -29,78 +44,69 @@ object AppSigning {
     const val SHA256 = "SHA256"
 
     /**
-     * 返回一个签名的对应类型的字符串
+     * Returns a string of the corresponding type for a signature
      *
      * @param context
      * @param packageName
      * @param type
-     * @return
      */
     fun getSingInfo(context: Context, packageName: String, type: String): String {
-        var tmp = "error!"
+        var signStr = "error!"
         try {
             val signs: Array<Signature>? = getSignatures(context, packageName)
             val sig: Signature = signs!![0]
-            if (MD5 == type) {
-                tmp = getSignatureString(sig, MD5)
-            } else if (SHA1 == type) {
-                tmp = getSignatureString(sig, SHA1)
-            } else if (SHA256 == type) {
-                tmp = getSignatureString(sig, SHA256)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+            signStr = getSignatureString(sig, type)
+        } catch (_: Exception) {
         }
-        return tmp
+        return signStr
     }
 
     /**
-     * 返回对应包的签名信息
+     * Return the signature information of the corresponding package
      *
      * @param context
      * @param packageName
-     * @return
      */
     fun getSignatures(context: Context, packageName: String): Array<Signature>? {
-        var packageInfo: PackageInfo? = null
-        try {
-            packageInfo = context.packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
-            return packageInfo.signatures
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
+        return try {
+            val packageInfo: PackageInfo? = context.packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
+            packageInfo?.signatures
+        } catch (_: PackageManager.NameNotFoundException) {
+            null
         }
-        return null
     }
 
     /**
-     * 获取相应的类型的字符串（把签名的byte[]信息转换成16进制）
+     * Obtain the corresponding type of string (convert the signed byte [] information to hexadecimal)
      *
      * @param sig
      * @param type
-     * @return
      */
-    fun getSignatureString(sig: Signature, type: String?): String {
-        val hexBytes: ByteArray = sig.toByteArray()
+    fun getSignatureString(sig: Signature, type: String): String {
         var fingerprint = "error!"
         try {
-            val buffer = StringBuffer()
-            val digest = MessageDigest.getInstance(type)
-            if (digest != null) {
-                digest.reset()
-                digest.update(hexBytes)
-                val byteArray = digest.digest()
-                for (i in byteArray.indices) {
-                    if (Integer.toHexString(0xFF and byteArray[i].toInt()).length == 1) {
-                        buffer.append("0").append(Integer.toHexString(0xFF and byteArray[i].toInt())) //补0，转换成16进制
-                    } else {
-                        buffer.append(Integer.toHexString(0xFF and byteArray[i].toInt())) //转换成16进制
-                    }
-                }
-                fingerprint = buffer.toString().uppercase(Locale.getDefault()) //转换成大写
+            val hexBytes: ByteArray = sig.toByteArray()
+            val digest: MessageDigest = MessageDigest.getInstance(type).apply {
+                reset()
+                update(hexBytes)
             }
-        } catch (e: NoSuchAlgorithmException) {
-            e.printStackTrace()
+            val buffer = StringBuffer()
+            val byteArray = digest.digest()
+            for (i in byteArray.indices) {
+                val bi = Integer.toHexString(0xFF and byteArray[i].toInt())
+                if (bi.length == 1) {
+                    //Fill in 0 and convert to hexadecimal
+                    buffer.append("0").append(bi)
+                } else {
+                    //Convert to hexadecimal
+                    buffer.append(bi)
+                }
+            }
+            //Convert to uppercase
+            fingerprint = buffer.toString().uppercase(Locale.getDefault())
+        } catch (_: NoSuchAlgorithmException) {
         }
         return fingerprint
     }
+
 }
