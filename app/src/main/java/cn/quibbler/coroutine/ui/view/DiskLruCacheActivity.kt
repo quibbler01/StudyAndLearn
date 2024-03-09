@@ -2,9 +2,7 @@ package cn.quibbler.coroutine.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import cn.quibbler.coroutine.R
 import cn.quibbler.coroutine.databinding.ActivityDiskLruCacheBinding
-import com.jakewharton.disklrucache.DiskLruCache
 import java.io.File
 
 /**
