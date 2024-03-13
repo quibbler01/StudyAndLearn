@@ -4,6 +4,10 @@ import android.view.View
 
 class Expand {
 
+    companion object{
+
+    }
+
     fun test() {
         //val strs = PermissionRequester.STRS//arrayOf("quibbler", "potter")
         val strs = arrayOf("quibbler", "potter")
