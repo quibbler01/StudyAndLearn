@@ -7,11 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import cn.quibbler.coroutine.databinding.ActivityDiskLruCacheBinding
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.jakewharton.disklrucache.DiskLruCache
 import org.json.JSONObject
-import java.io.File
 
 /**
  * DiskLruCache简介   http://quibbler.cn/?thread-286.htm
