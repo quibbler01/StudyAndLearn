@@ -49,6 +49,9 @@ dependencies {
     //https://github.com/google/gson
     implementation("com.google.code.gson:gson:2.10.1")
 
+    //https://github.com/ReactiveX/RxAndroid
+    implementation("io.reactivex.rxjava3:rxjava:3.1.5")
+
     //https://developer.android.google.cn/kotlin/coroutines?hl=zh-cn#kts
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
