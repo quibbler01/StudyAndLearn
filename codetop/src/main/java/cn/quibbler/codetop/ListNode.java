@@ -33,4 +33,22 @@ public class ListNode {
         System.out.println();
     }
 
+    public ListNode print() {
+        traverseListNode(this);
+        return this;
+    }
+
+    public static ListNode createListNodeByArray(int... array) {
+        ListNode head = new ListNode(-1);
+
+        ListNode cur = head;
+
+        for (int i : array) {
+            cur.next = new ListNode(i);
+            cur = cur.next;
+        }
+
+        return head.next;
+    }
+
 }
