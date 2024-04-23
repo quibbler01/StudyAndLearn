@@ -1,9 +1,12 @@
 package cn.quibbler.coroutine.ui.view
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import cn.quibbler.coroutine.databinding.ActivityDiskLruCacheBinding
 import com.bumptech.glide.Glide
@@ -34,16 +37,25 @@ class DiskLruCacheActivity : AppCompatActivity() {
         binding = ActivityDiskLruCacheBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initView()
+
         initDiskLruCache()
-
-        val response: String = ""
-
-        if (response.isNotBlank()) {
-            val jsonObject = JSONObject(response)
-        }
 
         saveBitmap()
         getBitmap()
+    }
+
+    private fun initView() {
+        binding.jumpSettings.setOnClickListener {
+            openSettingView("com.xunmeng.pinduoduo")
+        }
+    }
+
+    fun openSettingView(pkg: String) {
+        val intent = Intent()
+        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+        intent.data = Uri.fromParts("package", pkg, null)
+        startActivity(intent)
     }
 
     private var diskLruCache: DiskLruCache? = null

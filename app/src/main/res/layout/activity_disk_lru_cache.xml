@@ -32,4 +32,10 @@
         android:layout_height="145dp"
         android:background="@color/cardview_shadow_start_color" />
 
+    <Button
+        android:id="@+id/jump_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到设置项" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>
