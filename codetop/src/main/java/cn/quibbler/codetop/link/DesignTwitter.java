@@ -18,7 +18,7 @@ public class DesignTwitter {
         }
 
         public List<Integer> getNewsFeed(int userId) {
-
+            return null;
         }
 
         public void follow(int followerId, int followeeId) {
