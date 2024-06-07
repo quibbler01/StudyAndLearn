@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.webkit.WebViewClient
 import cn.quibbler.coroutine.databinding.ActivityDiskLruCacheBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
@@ -43,6 +44,22 @@ class DiskLruCacheActivity : AppCompatActivity() {
 
         saveBitmap()
         getBitmap()
+
+        initWebView()
+    }
+
+    private fun initWebView() {
+        binding.webview.apply {
+            settings.javaScriptEnabled = true
+            settings.allowContentAccess = true
+            settings.allowFileAccessFromFileURLs
+
+            webViewClient = WebViewClient()
+            webChromeClient = CustomChromeClient()
+
+            addJavascriptInterface(Console(), "console")
+            loadUrl("https://blog.csdn.net/a461408739/article/details/71079629")
+        }
     }
 
     private fun initView() {
