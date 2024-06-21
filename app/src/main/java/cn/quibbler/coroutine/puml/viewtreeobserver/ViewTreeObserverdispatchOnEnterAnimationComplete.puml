@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> ActivityThread : handleEnterAnimationComplete()
+activate ActivityThread
+            ActivityThread-> Activity : dispatchEnterAnimationComplete()
+                activate Activity
+
+                Activity -[#FF0000]> ViewTreeObserver : dispatchOnEnterAnimationComplete()
+                    activate ViewTreeObserver
+
+                        ViewTreeObserver -[#FF0000]> OnEnterAnimationCompleteListener : onEnterAnimationComplete()
+                            activate OnEnterAnimationCompleteListener
+                            OnEnterAnimationCompleteListener -> ViewTreeObserver
+                            deactivate OnEnterAnimationCompleteListener
+
+                    ViewTreeObserver -> Activity
+                        deactivate ViewTreeObserver
+
+            ActivityThread<- Activity
+             deactivate Activity
+ <--ActivityThread
+ deactivate ActivityThread
+@enduml

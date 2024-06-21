@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> View : requestFocus()
+    activate View
+
+    View->View : requestFocusNoSearch(msg)
+    View->View : handleFocusGainInternal(msg)
+
+
+    View -[#FF0000]> ViewTreeObserver : dispatchOnGlobalFocusChange()
+        activate ViewTreeObserver
+
+            ViewTreeObserver -[#FF0000]> OnGlobalFocusChangeListener : onGlobalFocusChanged()
+                activate OnGlobalFocusChangeListener
+                OnGlobalFocusChangeListener -> ViewTreeObserver
+                deactivate OnGlobalFocusChangeListener
+
+        ViewTreeObserver -> View
+            deactivate ViewTreeObserver
+
+<- View
+ deactivate View
+
+@enduml

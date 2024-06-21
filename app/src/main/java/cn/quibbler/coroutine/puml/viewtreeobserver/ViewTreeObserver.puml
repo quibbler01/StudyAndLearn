@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+-> ViewRootHandler : handleMessage()
+    activate ViewRootHandler
+
+    ViewRootHandler->ViewRootHandler : handleMessageImpl(msg)
+
+
+    ViewRootHandler -> ViewRootImpl : handleWindowFocusChanged()
+        activate ViewRootImpl
+
+            ViewRootImpl -> ViewRootImpl : dispatchFocusEvent(
+                activate ViewRootImpl
+                    ViewRootImpl -[#FF0000]> ViewTreeObserver : dispatchOnWindowFocusChange()
+                     activate ViewTreeObserver
+
+                        ViewTreeObserver -[#FF0000]> OnWindowFocusChangeListener : onWindowFocusChanged()
+                            activate OnWindowFocusChangeListener
+                        OnWindowFocusChangeListener -> ViewTreeObserver
+                            deactivate OnWindowFocusChangeListener
+
+
+                     ViewTreeObserver -> ViewRootImpl
+                     deactivate ViewTreeObserver
+
+                deactivate ViewRootImpl
+
+
+        ViewRootImpl -> ViewRootHandler
+            deactivate ViewRootImpl
+
+<- ViewRootHandler
+ deactivate ViewRootHandler
+
+@enduml
