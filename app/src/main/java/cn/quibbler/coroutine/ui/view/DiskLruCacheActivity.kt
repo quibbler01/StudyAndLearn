@@ -46,6 +46,10 @@ class DiskLruCacheActivity : AppCompatActivity() {
         getBitmap()
 
         initWebView()
+
+        window.decorView.viewTreeObserver.apply {
+
+        }
     }
 
     private fun initWebView() {
