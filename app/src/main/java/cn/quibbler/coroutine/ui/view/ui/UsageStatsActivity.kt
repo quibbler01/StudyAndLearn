@@ -61,6 +61,7 @@ class UsageStatsActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.P)
     fun aqueryUsage() {
         val usageStateManager: UsageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+
         usageStateManager.apply {
             val calendar = Calendar.getInstance()
             val endTime = calendar.timeInMillis
