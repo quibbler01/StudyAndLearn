@@ -58,7 +58,6 @@ class UsageStatsActivity : AppCompatActivity() {
         window.decorView.viewTreeObserver.isAlive
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
     fun aqueryUsage() {
         val usageStateManager: UsageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
 
