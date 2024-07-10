@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.webkit.WebView
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,21 @@ class AppOpsManagerActivity : AppCompatActivity() {
         appOpsManager = getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
 
         appOpsManager.startWatchingMode("", packageName, wacth)
+
+        kotlin.runCatching {
+            var userAgent = System.getProperty("http.agent")
+            //Dalvik/2.1.0 (Linux; U; Android 13; V2055A Build/TP1A.220624.014)
+            Log.d("QUIBBLER_A", "userAgent : $userAgent")
+
+            val webView = WebView(this)
+            val setting = webView.settings
+            userAgent = setting.userAgentString
+            //Mozilla/5.0 (Linux; Android 13; V2055A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/115.0.5790.166 Mobile Safari/537.36
+            Log.d("QUIBBLER_A", "setting.userAgentString : $userAgent")
+
+            //replace UA
+            setting.userAgentString = userAgent
+        }
 
         ops()
     }
