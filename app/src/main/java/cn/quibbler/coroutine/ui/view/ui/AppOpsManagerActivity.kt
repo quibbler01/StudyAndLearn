@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
@@ -65,7 +66,10 @@ class AppOpsManagerActivity : AppCompatActivity() {
     }
 
     private fun ops() {
-        appOpsManager
+        appOpsManager.apply {
+
+        }
+        WebSettings.getDefaultUserAgent(this)
     }
 
     fun checkPermission(pkg: String, op: String): Int {
