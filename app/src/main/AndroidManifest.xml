@@ -26,7 +26,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.ui.AppOpsManagerActivity"
+            android:name=".ui.view.ui.StorageStatsManagerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,16 +35,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.view.ui.UsageStatsActivity"
+            android:name=".ui.view.ui.AppOpsManagerActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".ui.view.DiskLruCacheActivity"
+            android:name=".ui.view.ui.UsageStatsActivity"
             android:exported="true"></activity>
         <activity
+            android:name=".ui.view.DiskLruCacheActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.view.SignInfoActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".github.koin.KoinActivity"
             android:exported="true" />

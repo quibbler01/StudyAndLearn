@@ -2,8 +2,12 @@ package cn.quibbler.coroutine.ui.view.ui
 
 import android.app.AppOpsManager
 import android.content.Context
+import android.database.ContentObserver
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.provider.Settings
 import android.util.Log
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -49,6 +53,17 @@ class AppOpsManagerActivity : AppCompatActivity() {
         }
 
         ops()
+
+        Settings.Global.getInt(contentResolver, "")
+
+        Settings.System.getInt(contentResolver, "")
+
+        Settings.Secure.getInt(contentResolver, "")
+
+
+        val observer = SettingsContentObserver()
+        val uri = Settings.Global.getUriFor("")
+        contentResolver.registerContentObserver(uri, true, observer)
     }
 
     override fun onDestroy() {
@@ -96,6 +111,14 @@ class AppOpsManagerActivity : AppCompatActivity() {
             packageManager.getPackageUid(pkg, 0) == uid
         }.isSuccess
 
+    }
+
+}
+
+class SettingsContentObserver : ContentObserver(Handler()) {
+
+    override fun onChange(selfChange: Boolean, uri: Uri?) {
+        super.onChange(selfChange, uri)
     }
 
 }
