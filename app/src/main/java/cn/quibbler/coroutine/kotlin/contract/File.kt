@@ -47,7 +47,7 @@ fun move2(file: File) {
 @ExperimentalContracts
 fun test() {
     var data: String
-        init {
+    init {
         data = ""
     }
     data.length

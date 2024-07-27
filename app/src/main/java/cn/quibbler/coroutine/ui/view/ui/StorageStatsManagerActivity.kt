@@ -59,7 +59,7 @@ class StorageStatsManagerActivity : AppCompatActivity() {
         }.forEach { volume ->
             val uuid = volume.storageUuid!!
 
-            Log.d(TAG, "storageManager.getAllocatableBytes(uuid) ${storageManager.getAllocatableBytes(uuid)}")
+            Log.d(TAG, "$uuid getAllocatableBytes(uuid) ${storageManager.getAllocatableBytes(uuid).toMb()}")
 
             //
             val total = storageStatsManager.getTotalBytes(uuid)
