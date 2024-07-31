@@ -26,12 +26,14 @@ class ExifInterfaceActivity : AppCompatActivity() {
         test()
     }
 
-    private fun test(){
+    private fun test() {
         val path = ""
-        val exif = ExifInterface("").apply {
-            thumbnailBitmap
-        }
+        val exif = ExifInterface(path)
+        var orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
 
+        val orientation = exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+
+        exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_ROTATE_180.toString())
 
     }
 
