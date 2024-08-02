@@ -2,6 +2,8 @@ package cn.quibbler.coroutine.kotlin.coroutine
 
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import okhttp3.Dispatcher
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
@@ -11,8 +13,13 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.startCoroutine
 
 
-fun create() {
+suspend fun create() {
 
+    coroutineScope {
+        async {
+
+        }
+    }
 
     // result is Continuation<Unit>
     val s = suspend {

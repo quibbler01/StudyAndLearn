@@ -54,10 +54,13 @@ class StorageStatsManagerActivity : AppCompatActivity() {
 
         val storageManager = getSystemService(Context.STORAGE_SERVICE) as StorageManager
 
+        val sv = storageManager.storageVolumes
+
         storageManager.storageVolumes.apply {
             Log.d(TAG, "storageVolumes ${this.size}")
-        }.forEach { volume ->
-            val uuid = volume.storageUuid!!
+        }.forEach { storageVolume ->
+            storageVolume.storageUuid
+            val uuid = storageVolume.storageUuid!!
 
             Log.d(TAG, "$uuid getAllocatableBytes(uuid) ${storageManager.getAllocatableBytes(uuid).toMb()}")
 
