@@ -9,12 +9,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.util.Log
+import android.view.ViewConfiguration
 import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.ViewConfigurationCompat
 import androidx.core.view.WindowInsetsCompat
 import cn.quibbler.coroutine.R
 
@@ -32,6 +34,9 @@ class AppOpsManagerActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val viewConfiguration = ViewConfiguration.get(this)
+        val viewConfigurationCompat = ViewConfigurationCompat.getScaledHoverSlop(viewConfiguration)
 
         appOpsManager = getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
 
