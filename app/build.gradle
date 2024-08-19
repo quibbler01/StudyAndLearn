@@ -53,36 +53,36 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxjava:3.1.5")
 
     //https://developer.android.google.cn/kotlin/coroutines?hl=zh-cn#kts
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
     //https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.10.1")
 
     //https://developer.android.google.cn/kotlin/ktx/extensions-list?hl=zh-cn
     implementation("androidx.collection:collection-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.6.1")
+    implementation("androidx.activity:activity-ktx:1.8.0")
 
     //https://github.com/uber/AutoDispose
     implementation 'com.uber.autodispose2:autodispose-android:2.1.1'
 
     //https://developer.android.google.cn/kotlin/ktx/extensions-list?hl=zh-cn#androidxlifecycle
-    implementation("androidx.lifecycle:lifecycle-livedata-core-ktx:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-core-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation "androidx.startup:startup-runtime:1.1.1"
 
     //https://developer.android.com/kotlin/ktx/extensions-list#dependency_30
-    implementation "androidx.room:room-ktx:2.5.0"
+    implementation "androidx.room:room-ktx:2.5.1"
 
     //https://github.com/coil-kt/coil
-    implementation("io.coil-kt:coil:2.4.0")
+    implementation("io.coil-kt:coil:2.7.0")
 
     //https://github.com/square/otto
     implementation 'com.squareup:otto:1.3.8'
 
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.9.10"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.9.20"
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
