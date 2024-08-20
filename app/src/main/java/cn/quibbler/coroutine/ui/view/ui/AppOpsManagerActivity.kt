@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import android.view.ViewConfiguration
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -19,6 +20,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.ViewConfigurationCompat
 import androidx.core.view.WindowInsetsCompat
 import cn.quibbler.coroutine.R
+
 
 @RequiresApi(Build.VERSION_CODES.Q)
 class AppOpsManagerActivity : AppCompatActivity() {
@@ -48,6 +50,25 @@ class AppOpsManagerActivity : AppCompatActivity() {
             Log.d("QUIBBLER_A", "userAgent : $userAgent")
 
             val webView = WebView(this)
+            webView.hitTestResult
+            webView.setOnLongClickListener {
+                val result = webView.hitTestResult
+                val type = result.type
+                when (type) {
+                    WebView.HitTestResult.EDIT_TEXT_TYPE -> {}
+                    WebView.HitTestResult.PHONE_TYPE -> {}
+                    WebView.HitTestResult.EMAIL_TYPE -> {}
+                    WebView.HitTestResult.GEO_TYPE -> {}
+                    WebView.HitTestResult.SRC_ANCHOR_TYPE -> {}
+                    WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE -> {}
+                    WebView.HitTestResult.IMAGE_TYPE -> {
+                        var data: String? = result.extra    //获取图片
+                    }
+
+                    WebView.HitTestResult.UNKNOWN_TYPE -> {}
+                }
+                false
+            }
             val setting = webView.settings
             userAgent = setting.userAgentString
             //Mozilla/5.0 (Linux; Android 13; V2055A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/115.0.5790.166 Mobile Safari/537.36
