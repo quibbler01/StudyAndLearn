@@ -1,6 +1,7 @@
 package cn.quibbler.coroutine.ui.view.ui
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.usage.StorageStatsManager
 import android.content.Context
 import android.os.Build
@@ -43,6 +44,25 @@ class StorageStatsManagerActivity : AppCompatActivity() {
         }.getOrElse { e ->
             Log.e(TAG, "get failed", e)
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    private val screenCaptureCallback = object : Activity.ScreenCaptureCallback {
+        override fun onScreenCaptured() {
+
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    override fun onResume() {
+        super.onResume()
+        registerScreenCaptureCallback(mainExecutor, screenCaptureCallback)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    override fun onPause() {
+        super.onPause()
+        unregisterScreenCaptureCallback(screenCaptureCallback)
     }
 
     private fun init() {

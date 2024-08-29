@@ -22,6 +22,7 @@ class App : Application() {
                 single { this@App } bind Context::class
             }
         }
+        registerActivityLifecycleCallbacks()
     }
 
 }
