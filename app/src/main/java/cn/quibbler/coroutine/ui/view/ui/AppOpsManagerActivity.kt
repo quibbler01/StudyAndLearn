@@ -111,6 +111,8 @@ class AppOpsManagerActivity : AppCompatActivity() {
 
         }
         WebSettings.getDefaultUserAgent(this)
+
+
     }
 
     fun checkPermission(pkg: String, op: String): Int {

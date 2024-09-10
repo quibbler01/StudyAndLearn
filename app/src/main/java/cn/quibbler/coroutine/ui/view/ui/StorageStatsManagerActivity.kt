@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.usage.StorageStatsManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Process
 import android.os.storage.StorageManager
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
@@ -39,10 +42,45 @@ class StorageStatsManagerActivity : AppCompatActivity() {
             insets
         }
 
+        binding.jumpWithPackage.setOnClickListener {
+            kotlin.runCatching {
+                Log.d(TAG, "jumpWithPackage")
+                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, Uri.parse("package:$packageName"))
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }.getOrElse { e ->
+                Log.e(TAG, "start jumpWithoutPackage", e)
+            }
+        }
+
+        binding.jumpWithoutPackage.setOnClickListener {
+//            jump(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            kotlin.runCatching {
+                Log.d(TAG, "jumpWithoutPackage")
+                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }.getOrElse { e ->
+                Log.e(TAG, "start jumpWithoutPackage", e)
+            }
+        }
+
         kotlin.runCatching {
             init()
+
         }.getOrElse { e ->
             Log.e(TAG, "get failed", e)
+        }
+    }
+
+    fun jump(action: String) {
+        val uri = Uri.parse("package:$packageName")
+        val intent = Intent(action, uri)
+        if (packageManager.queryIntentActivities(intent, 0).size != 0) {
+            startActivity(intent)
+        } else {
+            intent.setData(null)
+            startActivity(intent)
         }
     }
 
