@@ -56,7 +56,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
     //https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
-    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.core:core-ktx:1.13.1")
 
     //https://developer.android.google.cn/kotlin/ktx/extensions-list?hl=zh-cn
     implementation("androidx.collection:collection-ktx:1.2.0")
@@ -72,6 +72,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation "androidx.startup:startup-runtime:1.1.1"
+
+    //https://developer.android.google.cn/jetpack/androidx/releases/paging?hl=zh-cn
+    implementation("androidx.paging:paging-runtime:3.3.2")
 
     //https://developer.android.com/kotlin/ktx/extensions-list#dependency_30
     implementation "androidx.room:room-ktx:2.5.1"
