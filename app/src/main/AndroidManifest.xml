@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.DETECT_SCREEN_CAPTURE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -34,10 +33,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.ui.ExifInterfaceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.view.ui.StorageStatsManagerActivity"
+            android:name=".jitpack.paging.Paging3Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,8 +42,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.view.ui.ExifInterfaceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.ui.StorageStatsManagerActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".ui.view.ui.AppOpsManagerActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.ui.UsageStatsActivity"
             android:exported="true" />
