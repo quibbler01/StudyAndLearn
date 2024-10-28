@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
 import androidx.activity.enableEdgeToEdge
@@ -111,6 +112,40 @@ class WebViewActivity : AppCompatActivity() {
         }
 
         binding.webView.loadUrl("http://tv.cctv.com/2024/05/27/VIDEnA5ZjOCi5iYLqu192To0240527.shtml")
+
+        kotlin.runCatching {
+            var userAgent = System.getProperty("http.agent")
+            //Dalvik/2.1.0 (Linux; U; Android 13; V2055A Build/TP1A.220624.014)
+            Log.d("QUIBBLER_A", "userAgent : $userAgent")
+
+            val webView = WebView(this)
+            webView.hitTestResult
+            webView.setOnLongClickListener {
+                val result = webView.hitTestResult
+                val type = result.type
+                when (type) {
+                    WebView.HitTestResult.EDIT_TEXT_TYPE -> {}
+                    WebView.HitTestResult.PHONE_TYPE -> {}
+                    WebView.HitTestResult.EMAIL_TYPE -> {}
+                    WebView.HitTestResult.GEO_TYPE -> {}
+                    WebView.HitTestResult.SRC_ANCHOR_TYPE -> {}
+                    WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE -> {}
+                    WebView.HitTestResult.IMAGE_TYPE -> {
+                        var data: String? = result.extra    //获取图片
+                    }
+
+                    WebView.HitTestResult.UNKNOWN_TYPE -> {}
+                }
+                false
+            }
+            val setting = webView.settings
+            userAgent = setting.userAgentString
+            //Mozilla/5.0 (Linux; Android 13; V2055A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/115.0.5790.166 Mobile Safari/537.36
+            Log.d("QUIBBLER_A", "setting.userAgentString : $userAgent")
+
+            //replace UA
+            setting.userAgentString = userAgent
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
