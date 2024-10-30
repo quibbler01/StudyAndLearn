@@ -32,7 +32,7 @@ class AppOpsManagerActivity : AppCompatActivity() {
         }
 
         appOpsManager = getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
-        appOpsManager.startWatchingMode(OPSTR_RECORD_AUDIO_SANDBOXED, packageName, wacth)
+        appOpsManager.startWatchingMode("OPSTR_RECORD_AUDIO_SANDBOXED", packageName, wacth)
 
         ops()
     }

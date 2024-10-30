@@ -33,32 +33,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.ui.webview.WebViewActivity"
-            android:configChanges="orientation|screenSize|screenLayout"
+            android:name=".ui.view.ui.NetworkStatsActivity"
             android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".jitpack.paging.Paging3Activity"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".ui.view.ui.ExifInterfaceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.view.ui.StorageStatsManagerActivity"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".ui.view.ui.AppOpsManagerActivity"
-            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.view.ui.webview.WebViewActivity"
+            android:configChanges="orientation|screenSize|screenLayout"
+            android:exported="true"></activity>
+        <activity
+            android:name=".jitpack.paging.Paging3Activity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".ui.view.ui.ExifInterfaceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.ui.StorageStatsManagerActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".ui.view.ui.AppOpsManagerActivity"
+            android:exported="true">
+
         </activity>
         <activity
             android:name=".ui.view.ui.UsageStatsActivity"
