@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Process
+import android.os.UserHandle
 import android.provider.Settings
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,12 @@ class NetworkStatsActivity : AppCompatActivity() {
         } else {
             requestReadNetworkStats()
         }
+
+        val userHandle: UserHandle = android.os.Process.myUserHandle()
+
+        val pid = android.os.Process.myPid()
+
+        val uid = android.os.Process.myUid()
     }
 
     fun hasPermissionToReadNetworkStats(): Boolean {
@@ -49,7 +56,10 @@ class NetworkStatsActivity : AppCompatActivity() {
     private fun query() {
         val networkStatsManager: NetworkStatsManager = getSystemService(NETWORK_STATS_SERVICE) as NetworkStatsManager
         val bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_MOBILE, "", 0, System.currentTimeMillis())
-        Log.i(TAG, "Total: " + (bucket.rxBytes + bucket.txBytes) / 1024 / 1024 / 1024 + "Gb");
+        Log.i(TAG, "Total: " + (bucket.rxBytes + bucket.txBytes) / 1024 / 1024 / 1024 + "Gb")
+
+        networkStatsManager.queryDetailsForUid(ConnectivityManager.TYPE_WIFI, null, 0, System.currentTimeMillis(), uid)
+
     }
 
 }
