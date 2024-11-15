@@ -5,9 +5,21 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".ui.view.ui.NetworkStatsActivity">
 
+    <ImageView
+        android:id="@+id/outline_1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/cat" />
 
+    <ImageView
+        android:id="@+id/outline_2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/cat" />
 
 </LinearLayout>
