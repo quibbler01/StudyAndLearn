@@ -3,14 +3,18 @@ package cn.quibbler.coroutine.ui.view.ui
 import android.app.AppOpsManager
 import android.app.usage.NetworkStatsManager
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Outline
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.os.Process
 import android.os.UserHandle
 import android.provider.Settings
 import android.util.Log
+import android.view.PixelCopy
+import android.view.SurfaceView
 import android.view.View
 import android.view.ViewOutlineProvider
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +45,35 @@ class NetworkStatsActivity : AppCompatActivity() {
 
         val uid = android.os.Process.myUid()
 
+
+        android.os.Process.myUid()
+        val appId: String = application.getPackageName();
         initView()
+
+        testPixelCopy()
+    }
+
+    private fun testPixelCopy() {
+        val surface: SurfaceView = binding.surfaceView
+        val bitmap: Bitmap =
+            Bitmap.createBitmap(surface.width, surface.height, Bitmap.Config.ARGB_8888)
+
+        val surfaceHolder = surface.holder
+        val copyResult = PixelCopy.request(
+            surfaceHolder.surface,
+            bitmap,
+            object : PixelCopy.OnPixelCopyFinishedListener {
+                override fun onPixelCopyFinished(copyResult: Int) {
+                    if (copyResult == PixelCopy.SUCCESS) {
+                        //截图成功
+                        binding.outline1.setImageBitmap(bitmap)
+                    } else {
+                        //截图失败
+                    }
+                }
+            },
+            Handler()
+        )
     }
 
     private fun initView() {
