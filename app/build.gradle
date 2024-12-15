@@ -40,6 +40,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', includes: ['*.jar'])
 
+    implementation project(":vehicleedittext")
+
     //https://square.github.io/retrofit/
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
@@ -117,5 +119,8 @@ dependencies {
     //https://weeklycoding.com/mpandroidchart-documentation/
     //https://github.com/PhilJay/MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    //https://github.com/relish-wang/VehicleEditText
+    //implementation 'wang.relish.widget:vehicleedittext:1.0.2'
 
 }
