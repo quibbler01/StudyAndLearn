@@ -3,6 +3,7 @@ pluginManagement {
         google()
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://www.jitpack.io' }
+        maven { url 'https://jcenter.bintray.com' }
         mavenCentral()
     }
 }
@@ -12,6 +13,7 @@ dependencyResolutionManagement {
         google()
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://www.jitpack.io' }
+        maven { url 'https://jcenter.bintray.com' }
         mavenCentral()
     }
 }
@@ -19,3 +21,4 @@ rootProject.name = "StudyAndLearn"
 include ':app'
 include ':codetop'
 include ':search'
+include ':vehicleedittext'
