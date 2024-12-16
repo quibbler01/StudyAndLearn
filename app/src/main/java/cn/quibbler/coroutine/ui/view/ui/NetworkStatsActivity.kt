@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Outline
 import android.net.ConnectivityManager
+import android.net.TrafficStats
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -124,6 +125,7 @@ class NetworkStatsActivity : AppCompatActivity() {
 
         //networkStatsManager.queryDetailsForUid(ConnectivityManager.TYPE_WIFI, null, 0, System.currentTimeMillis(), uid)
 
+        TrafficStats.getMobileTxBytes()
     }
 
 }

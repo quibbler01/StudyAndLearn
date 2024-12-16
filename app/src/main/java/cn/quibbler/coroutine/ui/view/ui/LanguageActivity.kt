@@ -11,12 +11,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import cn.quibbler.coroutine.R
 import cn.quibbler.coroutine.databinding.ActivityLanguageBinding
+import wang.relish.widget.vehicleedittext.VehicleKeyboardHelper
 import java.util.Locale
 
 class LanguageActivity : AppCompatActivity() {
 
-    companion object{
-        const val TAG=  "TAG_LanguageActivity"
+    companion object {
+        const val TAG = "TAG_LanguageActivity"
     }
 
     private lateinit var binding: ActivityLanguageBinding
@@ -37,7 +38,21 @@ class LanguageActivity : AppCompatActivity() {
             insets
         }
 
-        Log.d(TAG,"layoutDirection:${resources.configuration.layoutDirection}")
+        initView()
+
+        Log.d(TAG, "layoutDirection:${resources.configuration.layoutDirection}")
+    }
+
+    private fun initView() {
+        VehicleKeyboardHelper.bind(binding.vehicleTick)
+    }
+
+    private fun kill() {
+        android.os.Process.killProcess(android.os.Process.myPid())
+
+        System.exit(0)
+        Runtime.getRuntime().exit(0);
+
     }
 
     fun changeLanguage(context: Context?, code: String = "ar"): Context? {
