@@ -43,6 +43,10 @@ class LanguageActivity : AppCompatActivity() {
         Log.d(TAG, "layoutDirection:${resources.configuration.layoutDirection}")
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
     private fun initView() {
         VehicleKeyboardHelper.bind(binding.vehicleTick)
     }
