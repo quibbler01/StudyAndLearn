@@ -33,6 +33,7 @@ class PhoneInfoActivity : AppCompatActivity() {
         var bitmap:Bitmap? = null
 
         description = ActivityManager.TaskDescription(label,bitmap)
+        ActivityManager.TaskDescription("跳一跳")
 
         setTaskDescription(description)
 

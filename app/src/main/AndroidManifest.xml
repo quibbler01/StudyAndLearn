@@ -33,15 +33,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:label="手机信息"
-            android:icon="@drawable/app_icon_one"
-            android:name=".ui.view.ui.faker.PhoneInfoActivity"
+            android:name=".ui.view.ui.faker.DiagnosisActivity"
+            android:excludeFromRecents="false"
+            android:maxRecents="3"
+            android:documentLaunchMode="intoExisting"
             android:exported="false" />
         <activity
-            android:label="手机诊断"
-            android:icon="@drawable/app_icon_two"
+            android:name=".ui.view.ui.faker.PhoneInfoActivity"
+            android:exported="false"
+            android:icon="@drawable/app_icon_one"
+            android:label="手机信息" />
+        <activity
             android:name=".ui.view.ui.MultiActivity"
-            android:exported="true">
+            android:exported="true"
+            android:icon="@drawable/app_icon_two"
+            android:label="手机诊断">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,10 +56,10 @@
         </activity>
         <activity
             android:name=".ui.view.ui.LanguageActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.ui.NetworkStatsActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.ui.webview.WebViewActivity"
             android:configChanges="orientation|screenSize|screenLayout"

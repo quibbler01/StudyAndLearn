@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import cn.quibbler.coroutine.R
 import cn.quibbler.coroutine.databinding.ActivityMultiBinding
+import cn.quibbler.coroutine.ui.view.ui.faker.DiagnosisActivity
 import cn.quibbler.coroutine.ui.view.ui.faker.PhoneInfoActivity
 
 class MultiActivity : AppCompatActivity() , View.OnClickListener{
@@ -39,7 +40,7 @@ class MultiActivity : AppCompatActivity() , View.OnClickListener{
                 intent.setClass(this,PhoneInfoActivity::class.java)
             }
             else->{
-                intent.setClass(this,PhoneInfoActivity::class.java)
+                intent.setClass(this,DiagnosisActivity::class.java)
             }
         }
         startActivity(intent)
