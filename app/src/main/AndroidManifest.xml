@@ -33,11 +33,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.view.ui.payload.PayloadActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.view.ui.faker.DiagnosisActivity"
-            android:excludeFromRecents="false"
-            android:maxRecents="3"
             android:documentLaunchMode="intoExisting"
-            android:exported="false" />
+            android:excludeFromRecents="false"
+            android:exported="false"
+            android:maxRecents="3" />
         <activity
             android:name=".ui.view.ui.faker.PhoneInfoActivity"
             android:exported="false"
@@ -48,11 +57,7 @@
             android:exported="true"
             android:icon="@drawable/app_icon_two"
             android:label="手机诊断">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.view.ui.LanguageActivity"
