@@ -41,6 +41,7 @@ dependencies {
     implementation fileTree(dir: 'libs', includes: ['*.jar'])
 
     implementation project(":vehicleedittext")
+    implementation project(":assistantwidget")
 
     //https://square.github.io/retrofit/
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
