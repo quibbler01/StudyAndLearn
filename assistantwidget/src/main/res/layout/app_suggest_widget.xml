@@ -2,18 +2,25 @@
     style="@style/Widget.StudyAndLearn.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     android:theme="@style/Theme.StudyAndLearn.AppWidgetContainer">
 
+    <ListView
+        android:id="@+id/suggest_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/suggest_text" />
+
     <TextView
-        android:id="@+id/appwidget_text"
-        style="@style/Widget.StudyAndLearn.AppWidget.InnerView"
+        android:id="@+id/suggest_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
         android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
-        android:textSize="24sp"
+        android:textSize="12sp"
         android:textStyle="bold|italic" />
+
 </RelativeLayout>
