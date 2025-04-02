@@ -8,6 +8,8 @@ import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.Button
+import androidx.compose.runtime.Composable
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import cn.quibbler.coroutine.R
@@ -15,7 +17,7 @@ import cn.quibbler.coroutine.R
 @RequiresApi(Build.VERSION_CODES.Q)
 class AppOpsManagerActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         const val TAG = "TAG_AppOpsManagerActivity"
     }
 
@@ -29,6 +31,29 @@ class AppOpsManagerActivity : AppCompatActivity() {
         appOpsManager.startWatchingMode("OPSTR_RECORD_AUDIO_SANDBOXED", packageName, wacth)
 
         ops()
+
+        //@Composable invocations can only happen from the context of a @Composable function
+//        App()
+    }
+
+    @Composable
+    fun App(): Int {
+        Header()
+
+        Body()
+        return 1    //Composable不允许有返回值
+    }
+
+    @Composable
+    fun Header() {
+
+    }
+
+    @Composable
+    fun Body() {
+        Button(onClick = {}) {
+
+        }
     }
 
     override fun onDestroy() {
