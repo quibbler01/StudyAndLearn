@@ -57,6 +57,7 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
+    implementation "androidx.palette:palette-ktx:1.0.0"
 
     //https://square.github.io/retrofit/
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
