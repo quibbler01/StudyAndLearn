@@ -33,10 +33,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.ui.payload.PayloadActivity"
+            android:name=".github.moshi.MoshiActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.view.ui.payload.PayloadActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".ui.view.ui.faker.DiagnosisActivity"
             android:documentLaunchMode="intoExisting"
@@ -52,9 +59,7 @@
             android:name=".ui.view.ui.MultiActivity"
             android:exported="true"
             android:icon="@drawable/app_icon_two"
-            android:label="手机诊断">
-
-        </activity>
+            android:label="手机诊断"></activity>
         <activity
             android:name=".ui.view.ui.LanguageActivity"
             android:exported="true" />
@@ -76,12 +81,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.view.ui.AppOpsManagerActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true">
         </activity>
         <activity
             android:name=".ui.view.ui.UsageStatsActivity"
