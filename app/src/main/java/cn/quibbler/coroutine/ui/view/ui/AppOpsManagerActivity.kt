@@ -8,8 +8,6 @@ import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.Button
-import androidx.compose.runtime.Composable
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import cn.quibbler.coroutine.R
@@ -34,26 +32,6 @@ class AppOpsManagerActivity : AppCompatActivity() {
 
         //@Composable invocations can only happen from the context of a @Composable function
 //        App()
-    }
-
-    @Composable
-    fun App(): Int {
-        Header()
-
-        Body()
-        return 1    //Composable不允许有返回值
-    }
-
-    @Composable
-    fun Header() {
-
-    }
-
-    @Composable
-    fun Body() {
-        Button(onClick = {}) {
-
-        }
     }
 
     override fun onDestroy() {
