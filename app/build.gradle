@@ -30,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
 //        useIR = true
     }
 }
@@ -63,7 +63,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     //https://github.com/square/okhttp
-    implementation "com.squareup.okhttp3:okhttp:4.11.0"
+    implementation "com.squareup.okhttp3:okhttp:4.12.0"
 
     //https://github.com/google/gson
     implementation("com.google.code.gson:gson:2.10.1")
@@ -72,24 +72,28 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxjava:3.1.5")
 
     //https://developer.android.google.cn/kotlin/coroutines?hl=zh-cn#kts
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     //https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
-    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.core:core-ktx:1.17.0")
 
     //https://developer.android.google.cn/kotlin/ktx/extensions-list?hl=zh-cn
-    implementation("androidx.collection:collection-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.8.0")
+    implementation("androidx.collection:collection-ktx:1.4.4")
+    implementation("androidx.activity:activity-ktx:1.11.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.9")
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation "androidx.savedstate:savedstate-ktx:1.3.3"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     //https://github.com/uber/AutoDispose
     implementation 'com.uber.autodispose2:autodispose-android:2.1.1'
 
     //https://developer.android.google.cn/kotlin/ktx/extensions-list?hl=zh-cn#androidxlifecycle
-    implementation("androidx.lifecycle:lifecycle-livedata-core-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-core-ktx:2.9.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.2")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.9.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2")
     implementation "androidx.startup:startup-runtime:1.1.1"
 
     //https://developer.android.google.cn/jetpack/androidx/releases/paging?hl=zh-cn
@@ -105,9 +109,7 @@ dependencies {
     implementation 'com.squareup:otto:1.3.8'
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.9.20"
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.10.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.13.0'
     implementation 'androidx.activity:activity:1.8.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -122,7 +124,7 @@ dependencies {
     implementation "io.insert-koin:koin-android:3.5.0"
 
     //https://github.com/Tencent/MMKV
-    implementation 'com.tencent:mmkv:1.3.2'
+    implementation 'com.tencent:mmkv:2.2.3'
 
     //https://github.com/bumptech/glide
     implementation 'com.github.bumptech.glide:glide:4.16.0'
@@ -139,5 +141,8 @@ dependencies {
 
     //https://github.com/relish-wang/VehicleEditText
     //implementation 'wang.relish.widget:vehicleedittext:1.0.2'
+
+    //https://github.com/airbnb/lottie-android
+    implementation 'com.airbnb.android:lottie:6.6.6'
 
 }
