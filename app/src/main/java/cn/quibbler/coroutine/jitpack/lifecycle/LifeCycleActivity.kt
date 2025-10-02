@@ -1,6 +1,8 @@
 package cn.quibbler.coroutine.jitpack.lifecycle
 
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,6 +11,10 @@ import cn.quibbler.coroutine.R
 import com.airbnb.lottie.LottieAnimationView
 
 class LifeCycleActivity : AppCompatActivity() {
+
+    companion object {
+        private const val TAG = "TAG_LifeCycleActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +30,17 @@ class LifeCycleActivity : AppCompatActivity() {
 
         lottieAnimationView?.setAnimation("")
         lottieAnimationView?.imageAssetsFolder = ""
+
+        val countDownTimer: CountDownTimer = object : CountDownTimer(100,10){
+            override fun onTick(millisUntilFinished: Long) {
+                Log.d(TAG,"onTick")
+            }
+
+            override fun onFinish() {
+                Log.d(TAG,"onFinish")
+            }
+        }
+
     }
 
 }
