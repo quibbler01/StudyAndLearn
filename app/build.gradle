@@ -6,17 +6,18 @@ plugins {
 
 android {
     namespace 'cn.quibbler.coroutine'
-    compileSdk 34
+    compileSdk 36
 
     buildFeatures {
         viewBinding true
+        buildConfig true
 //        compose = true
     }
 
     defaultConfig {
         applicationId "cn.quibbler.coroutine"
         minSdk 24
-        targetSdk 34
+        targetSdk 36
         versionCode 1
         versionName "1.0"
 
@@ -143,6 +144,7 @@ dependencies {
     //implementation 'wang.relish.widget:vehicleedittext:1.0.2'
 
     //https://github.com/airbnb/lottie-android
+    //https://airbnb.io/lottie/#/
     implementation 'com.airbnb.android:lottie:6.6.6'
 
 }

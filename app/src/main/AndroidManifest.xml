@@ -33,7 +33,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".jitpack.material.TabLayoutActivity"
+            android:name=".jitpack.lifecycle.LifeCycleActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,8 +42,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".jitpack.material.TabLayoutActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".github.moshi.MoshiActivity"
             android:exported="true">
+
         </activity>
         <activity
             android:name=".ui.view.ui.payload.PayloadActivity"
@@ -85,7 +91,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.view.ui.AppOpsManagerActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.ui.UsageStatsActivity"
             android:exported="true" />
