@@ -2,7 +2,11 @@ package cn.quibbler.coroutine.jitpack.lifecycle
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.HandlerThread
 import android.util.Log
+import android.view.FrameMetrics
+import android.view.Window
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,6 +30,10 @@ class LifeCycleActivity : AppCompatActivity() {
             insets
         }
 
+        val handler: HandlerThread = HandlerThread(TAG)
+        handler.start()
+        window.addOnFrameMetricsAvailableListener(onFrameMetricsAvailableListener, Handler(handler.looper))
+
         var lottieAnimationView: LottieAnimationView? = null
 
         lottieAnimationView?.setAnimation("")
@@ -41,6 +49,21 @@ class LifeCycleActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        window.removeOnFrameMetricsAvailableListener(onFrameMetricsAvailableListener)
+    }
+
+    private val onFrameMetricsAvailableListener: Window.OnFrameMetricsAvailableListener = object : Window.OnFrameMetricsAvailableListener{
+        override fun onFrameMetricsAvailable(
+            window: Window?,
+            frameMetrics: FrameMetrics?,
+            dropCountSinceLastInvocation: Int
+        ) {
+
+        }
     }
 
 }
