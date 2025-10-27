@@ -34,6 +34,8 @@
         tools:targetApi="31">
         <activity
             android:name=".jitpack.lifecycle.LifeCycleActivity"
+            android:showOnLockScreen="true"
+            android:showWhenLocked="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

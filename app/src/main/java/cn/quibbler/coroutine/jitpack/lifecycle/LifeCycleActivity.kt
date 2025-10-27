@@ -9,6 +9,7 @@ import android.view.FrameMetrics
 import android.view.Window
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.FrameMetricsAggregator
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import cn.quibbler.coroutine.R
@@ -19,6 +20,8 @@ class LifeCycleActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "TAG_LifeCycleActivity"
     }
+
+    private val aggregator: FrameMetricsAggregator = FrameMetricsAggregator()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +36,8 @@ class LifeCycleActivity : AppCompatActivity() {
         val handler: HandlerThread = HandlerThread(TAG)
         handler.start()
         window.addOnFrameMetricsAvailableListener(onFrameMetricsAvailableListener, Handler(handler.looper))
+
+        setShowWhenLocked(true)
 
         var lottieAnimationView: LottieAnimationView? = null
 
@@ -49,11 +54,14 @@ class LifeCycleActivity : AppCompatActivity() {
             }
         }
 
+        aggregator.add(this)
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         window.removeOnFrameMetricsAvailableListener(onFrameMetricsAvailableListener)
+        aggregator.remove(this)
     }
 
     private val onFrameMetricsAvailableListener: Window.OnFrameMetricsAvailableListener = object : Window.OnFrameMetricsAvailableListener{
@@ -62,7 +70,9 @@ class LifeCycleActivity : AppCompatActivity() {
             frameMetrics: FrameMetrics?,
             dropCountSinceLastInvocation: Int
         ) {
-
+            frameMetrics?.apply {
+                this.getMetric(FrameMetrics.FIRST_DRAW_FRAME)
+            }
         }
     }
 
