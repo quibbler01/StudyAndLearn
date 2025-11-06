@@ -19,8 +19,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 class FlowActivity : AppCompatActivity() {
 
@@ -54,6 +57,31 @@ class FlowActivity : AppCompatActivity() {
             binding.console.append("${MMKV.defaultMMKV().getString("key", "default")}")
         }
 
+        //registerMutiCollector()
+
+        lifecycleScope.launch {
+            collectLoginState()
+        }
+    }
+
+    private suspend fun collectLoginState(){
+        lifecycleScope.launch{
+            val random = Random
+            while (true) {
+                delay(1000 * random.nextInt(10).toLong())
+                _flow.emit("random:${Random.nextInt()}")
+            }
+        }
+
+        stateVM.uiState.zip(_flow){t1,t2->
+            "$t1--$t2"
+        }.collect { it->
+            console(it)
+        }
+    }
+
+    private fun registerMutiCollector(){
+        //必须在主线程初始化 访问ViewModel，否则多个协程会出现并发访问，创建多个ViewModel
         stateVM.uiState
 
         lifecycleScope.launch {
@@ -82,6 +110,7 @@ class FlowActivity : AppCompatActivity() {
     }
 
     private fun console(msg: String) {
+        Log.d(TAG,"$msg")
         lifecycleScope.launch(Dispatchers.Main) {
             binding.console.append("$msg\n")
         }

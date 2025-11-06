@@ -21,7 +21,8 @@ class StateFlowVM : ViewModel() {
     init {
         viewModelScope.launch {
             delay(2000)
-            repeat(5) {
+            repeat(500) {
+                delay(1500)
                 _uiState.emit(it)
             }
         }
