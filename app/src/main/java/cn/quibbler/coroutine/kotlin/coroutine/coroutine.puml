@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+interface CoroutineContext
+interface Element extends CoroutineContext
+class EmptyCoroutineContext extends CoroutineContext
+interface ContinuationInterceptor extends Element
+abstract class AbstractCoroutineContextElement extends Element
+abstract class CoroutineDispatcher extends AbstractCoroutineContextElement,ContinuationInterceptor
+class ExecutorCoroutineDispatcher extends CoroutineDispatcher
+class SchedulerCoroutineDispatcher extends ExecutorCoroutineDispatcher
+class DefaultScheduler extends SchedulerCoroutineDispatcher
+abstract class MainCoroutineDispatcher extends CoroutineDispatcher
+abstract class EventLoop extends CoroutineDispatcher
+abstract class EventLoopImplPlatform extends EventLoop
+class HandlerDispatcher extends MainCoroutineDispatcher
+class HandlerContext extends HandlerDispatcher
+interface CoroutineScope{
+    coroutineContext: CoroutineContext
+}
+class GlobalScope extends CoroutineScope
+interface ActorScope extends CoroutineScope
+abstract class LifecycleCoroutineScope extends CoroutineScope
+class LifecycleCoroutineScopeImpl extends LifecycleCoroutineScope
+interface Job extends Element
+interface ChildJob extends Job
+interface ParentJob extends Job
+interface CompletableJob extends Job
+class JobSupport extends Job,ChildJob,ParentJob
+class JobImpl extends JobSupport,CompletableJob
+class SupervisorJobImpl extends JobImpl
+interface Deferred extends Job
+interface CompletableDeferred extends Deferred
+class CompletableDeferredImpl extends JobSupport,CompletableDeferred
+interface Continuation{
+    context: CoroutineContext
+}
+abstract class AbstractCoroutine extends JobSupport, Job, Continuation,CoroutineScope
+class BlockingCoroutine extends AbstractCoroutine
+class ChannelCoroutine extends AbstractCoroutine
+class ProducerCoroutine extends ChannelCoroutine
+class ActorCoroutine extends ChannelCoroutine,ActorScope
+class LazyActorCoroutine extends ActorCoroutine
+class BroadcastCoroutine extends AbstractCoroutine
+class LazyBroadcastCoroutine extends BroadcastCoroutine
+class DeferredCoroutine extends AbstractCoroutine,Deferred
+class LazyDeferredCoroutine extends DeferredCoroutine
+class StandaloneCoroutine extends AbstractCoroutine
+class LazyStandaloneCoroutine extends StandaloneCoroutine
+class ScopeCoroutine extends AbstractCoroutine
+class DispatchedCoroutine extends ScopeCoroutine
+@enduml

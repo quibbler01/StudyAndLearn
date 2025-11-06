@@ -1,0 +1,45 @@
+@startuml 'https://plantuml.com/class-diagram
+interface Flow{
+    collect(collector: FlowCollector<T>)
+}
+interface CancellableFlow extends Flow
+
+class CancellableFlowImpl extends CancellableFlow
+
+interface FusibleFlow extends Flow{
+    fuse(): Flow<T>
+}
+abstract class ChannelFlow extends FusibleFlow
+class ChannelFlowMerge extends ChannelFlow
+class ChannelFlowOperator extends ChannelFlow
+class ChannelFlowOperatorImpl extends ChannelFlowOperator
+class ChannelFlowTransformLatest extends ChannelFlowOperator
+class ChannelLimitedFlowMerge extends ChannelFlow
+class ChannelAsFlow extends ChannelFlow
+class ChannelFlowBuilder extends ChannelFlow
+class CallbackFlowBuilder extends ChannelFlowBuilder
+abstract class AbstractFlow extends Flow,CancellableFlow
+class SafeFlow extends AbstractFlow
+
+interface SharedFlow extends Flow{
+    replayCache: List<T>
+}
+
+
+interface FlowCollector{
+    emit(value: T)
+}
+interface MutableSharedFlow extends SharedFlow,FlowCollector
+class SharedFlowImpl extends MutableSharedFlow,CancellableFlow,FusibleFlow
+class ReadonlySharedFlow extends SharedFlow,CancellableFlow,FusibleFlow
+
+interface StateFlow extends SharedFlow{
+    value: T
+}
+interface MutableStateFlow extends StateFlow,MutableSharedFlow
+class StateFlowImpl extends MutableStateFlow,CancellableFlow,FusibleFlow
+class SubscriptionCountStateFlow extends StateFlow,SharedFlowImpl
+class ReadonlyStateFlow extends StateFlow,CancellableFlow,FusibleFlow
+
+@enduml
+
