@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="3"
+        android:text="新闻是通过报纸、电台、电视台、互联网等媒介传播的记录社会事件、传递信息的文体，具有真实性、时效性、公开性等特点。广义新闻包含消息、通讯、特写等多种形式，狭义专指消息，强调迅速报道国内外新近发生的事件 [4] [10] [16]。其结构通常由标题、导语、主体、背景、结尾五部分组成，内容需包含时间、地点、人物、事件、结果五要素，报道形式涵盖倒金字塔式、正金字塔式等 [8] [10]。随着技术发展，新闻生产引入智能化流程，可视化新闻、短视频新闻等形态成为新兴报道方式"
+        android:textColor="@color/dark_gray"
+        android:textSize="14sp" />
+
+</LinearLayout>
