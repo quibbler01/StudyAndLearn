@@ -33,22 +33,25 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".jitpack.lifecycle.LifeCycleActivity"
-            android:showOnLockScreen="true"
-            android:showWhenLocked="true"
+            android:name=".jitpack.recyclerview.RecyclerViewActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name=".jitpack.lifecycle.LifeCycleActivity"
+            android:exported="true"
+            android:showOnLockScreen="true"
+            android:showWhenLocked="true"></activity>
         <activity
             android:name=".jitpack.material.TabLayoutActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".github.moshi.MoshiActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.view.ui.payload.PayloadActivity"
             android:exported="true" />
@@ -104,12 +107,8 @@
             android:exported="true" />
         <activity
             android:name=".kotlin.flow.FlowActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".jitpack.parcelize.ParcelizeActivity"
