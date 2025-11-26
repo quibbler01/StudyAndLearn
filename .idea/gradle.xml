@@ -13,11 +13,11 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/assistantwidget" />
             <option value="$PROJECT_DIR$/codetop" />
+            <option value="$PROJECT_DIR$/dynamicfeature-downloader" />
             <option value="$PROJECT_DIR$/search" />
             <option value="$PROJECT_DIR$/vehicleedittext" />
           </set>
         </option>
-        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
