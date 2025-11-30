@@ -57,13 +57,22 @@ class MainActivity : AppCompatActivity() {
         Glide.with(applicationContext)
             .load(images[index])
             .addListener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>,
+                    isFirstResource: Boolean
+                ): Boolean {
                     loadImage(img, images, index + 1)
                     return true
                 }
 
                 override fun onResourceReady(
-                    resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean
+                    resource: Drawable,
+                    model: Any,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource,
+                    isFirstResource: Boolean
                 ): Boolean {
                     return true
                 }
@@ -104,12 +113,21 @@ class MainActivity : AppCompatActivity() {
                 priority(Priority.HIGH)
                 diskCacheStrategy(DiskCacheStrategy.NONE)
             }).addListener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>,
+                    isFirstResource: Boolean
+                ): Boolean {
                     return true
                 }
 
                 override fun onResourceReady(
-                    resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean
+                    resource: Drawable,
+                    model: Any,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource,
+                    isFirstResource: Boolean
                 ): Boolean {
                     return true
                 }
@@ -129,6 +147,12 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun download() {
+        lifecycleScope.launch {
+            //FileDownloader.download()
         }
     }
 
