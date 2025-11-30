@@ -38,6 +38,7 @@ android {
         jvmTarget = '17'
 //        useIR = true
     }
+    dynamicFeatures = [':dynamicfeature-downloader']
 }
 
 dependencies {
@@ -73,7 +74,8 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxjava:3.1.5")
 
     //https://developer.android.google.cn/kotlin/coroutines?hl=zh-cn#kts
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    //https://github.com/Kotlin/kotlinx.coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 
     //https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
     implementation("androidx.core:core-ktx:1.17.0")
