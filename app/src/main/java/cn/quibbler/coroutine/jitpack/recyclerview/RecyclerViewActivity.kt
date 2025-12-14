@@ -35,7 +35,7 @@ class RecyclerViewActivity : AppCompatActivity() {
         }
         binding.jumpSmallWindow.setOnClickListener { view ->
             val intent = getPackageManager().getLaunchIntentForPackage("com.mmbox.xbrowser.pro")!!
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT)
 
             val options: ActivityOptions = ActivityOptions.makeBasic()
             options.setLaunchBounds(Rect(100, 100, 600, 800))

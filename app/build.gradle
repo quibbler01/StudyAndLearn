@@ -38,7 +38,7 @@ android {
         jvmTarget = '17'
 //        useIR = true
     }
-    dynamicFeatures = [':dynamicfeature-downloader']
+    dynamicFeatures = [':dynamicfeaturedownloader']
 }
 
 dependencies {
