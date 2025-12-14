@@ -8,6 +8,21 @@
     android:orientation="vertical"
     tools:context=".jitpack.recyclerview.RecyclerViewActivity">
 
+    <LinearLayout
+        android:layout_marginTop="48dp"
+        android:id="@+id/function_area"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/jump_small_window"
+            android:text="小窗跳转"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
