@@ -8,7 +8,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.dsl.bind
 import org.koin.dsl.module
-import cn.quibbler.coroutine.BuildConfig;
+import cn.quibbler.coroutine.BuildConfig
 
 class App : Application() {
 

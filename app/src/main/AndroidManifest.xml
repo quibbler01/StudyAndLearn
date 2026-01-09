@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.DETECT_SCREEN_CAPTURE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,6 +9,12 @@
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
     <uses-permission
         android:name="android.permission.READ_MEDIA_IMAGES"
         tools:ignore="SelectedPhotoAccess" />
@@ -31,10 +37,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coroutine"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="31" >
         <activity
-            android:name=".jitpack.recyclerview.RecyclerViewActivity"
-            android:exported="true">
+            android:name=".hardware.NfcActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,16 +48,21 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".jitpack.recyclerview.RecyclerViewActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
             android:name=".jitpack.lifecycle.LifeCycleActivity"
             android:exported="true"
             android:showOnLockScreen="true"
-            android:showWhenLocked="true"></activity>
+            android:showWhenLocked="true" />
         <activity
             android:name=".jitpack.material.TabLayoutActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".github.moshi.MoshiActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.ui.payload.PayloadActivity"
             android:exported="true" />
@@ -107,8 +118,7 @@
             android:exported="true" />
         <activity
             android:name=".kotlin.flow.FlowActivity"
-            android:exported="true">
-
+            android:exported="true" >
         </activity>
         <activity
             android:name=".jitpack.parcelize.ParcelizeActivity"
@@ -129,13 +139,28 @@
             android:name=".MainActivity"
             android:exported="true" />
 
+        <activity
+            android:name="cn.quibbler.coroutine.feature.share.FileShareActivity"
+            android:exported="true"
+            android:label="File Share Demo" />
+
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="cn.quibbler.coroutine.initializer.InitKey"
                 android:value="androidx.startup" />
+        </provider>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
 
