@@ -3,6 +3,7 @@ package cn.quibbler.coroutine.hardware
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.res.Resources
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
 import android.nfc.NfcAdapter
@@ -12,10 +13,13 @@ import android.nfc.tech.NdefFormatable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.widget.ArrayAdapter
+import android.widget.ListPopupWindow
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.graphics.colorspace.connect
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import cn.quibbler.coroutine.R
@@ -100,7 +104,79 @@ class NfcActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
+
+        showPop()
     }
+
+    private fun showPop() {
+/*        binding.butt.setOnClickListener { view ->
+*//*            val popMenu = PopupMenu(this@NfcActivity, it, Gravity.START)
+            val menu = popMenu.menu
+            menu.apply {
+                repeat(15){ times->
+                    menu.add(1,times,times,"翻译文件")
+                }
+            }
+            popMenu.show()*//*
+            // 1. 准备数据源
+            val items = List(15) { "翻译文件 $it" }
+
+            // 2. 初始化 ListPopupWindow
+            val listPop = ListPopupWindow(this@NfcActivity).apply {
+                // 3. 设置适配器 (使用系统默认布局)
+                setAdapter(
+                    ArrayAdapter(
+                        this@NfcActivity,
+                        android.R.layout.simple_list_item_1,
+                        items
+                    )
+                )
+
+                // 4. 绑定锚点和对齐方式
+                anchorView = view
+                setDropDownGravity(Gravity.START)
+                // 5. 关键：解决你提到的对齐偏移
+                // 如果视觉上仍有间隙，尝试微调这两个值
+                horizontalOffset = 0
+                verticalOffset = 0
+                // 6. 必须设置宽度，否则可能无法显示或宽度异常
+                width = ListPopupWindow.WRAP_CONTENT // 或者使用 wrap_content: ListPopupWindow.WRAP_CONTENT
+                // 7. 设置点击回调
+                setOnItemClickListener { _, _, position, _ ->
+                    // 处理点击事件，例如：handleTranslate(position)
+                    dismiss()
+                }
+                isModal = true // 点击外部自动消失
+            }
+            listPop.show()
+        }*/
+
+        binding.butt.setOnClickListener { view ->
+            val items = List(20) { "翻译文件 $it" }
+            val listPop = ListPopupWindow(this).apply {
+                setAdapter(ArrayAdapter(this@NfcActivity, android.R.layout.simple_list_item_1, items))
+                anchorView = view
+
+                // --- The Height Logic ---
+                val itemHeight = 48.dpToPx() // Convert dp to pixels
+                val maxHeight = itemHeight * 8
+
+                // Check if screen height is actually smaller than 8 items (half-screen protection)
+                val screenHeight = resources.displayMetrics.heightPixels
+                val finalHeight = if (maxHeight > screenHeight / 2) screenHeight / 2 else maxHeight
+
+                height = finalHeight
+                width = 400 // Set a fixed width or wrap_content
+
+                isModal = true
+            }
+            listPop.show()
+        }
+
+    }
+
+    // Helper extension to handle DP to PX
+    fun Int.dpToPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 
     override fun onResume() {
         super.onResume()
@@ -246,6 +322,7 @@ class NfcActivity : AppCompatActivity() {
                     // 0x100E is the Credential Attribute. content is nested inside.
                     return parseWifiRecord(value)
                 }
+
                 0x1045 -> ssid = String(value, Charset.forName("UTF-8"))
                 0x1027 -> networkKey = String(value, Charset.forName("UTF-8"))
             }
@@ -272,7 +349,8 @@ class NfcActivity : AppCompatActivity() {
         System.arraycopy(langBytes, 0, payload, 1, langBytes.size)
         System.arraycopy(textBytes, 0, payload, 1 + langBytes.size, textBytes.size)
 
-        val record = NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, ByteArray(0), payload)
+        val record =
+            NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, ByteArray(0), payload)
         return NdefMessage(arrayOf(record))
     }
 
@@ -305,9 +383,17 @@ class NfcActivity : AppCompatActivity() {
                     formatable.connect()
                     formatable.format(message)
                     formatable.close()
-                    Toast.makeText(this, "Successfully formatted and wrote to tag!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Successfully formatted and wrote to tag!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    Toast.makeText(this, "Tag does not support NDEF formatting.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Tag does not support NDEF formatting.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         } catch (e: IOException) {
