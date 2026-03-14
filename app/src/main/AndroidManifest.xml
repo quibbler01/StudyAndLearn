@@ -10,10 +10,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <uses-permission
         android:name="android.permission.READ_MEDIA_IMAGES"
@@ -138,6 +142,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".jitpack.mlkit.MlKitActivity"
+            android:exported="true"
+            android:label="ML Kit Demo" />
 
         <activity
             android:name="cn.quibbler.coroutine.feature.share.FileShareActivity"
